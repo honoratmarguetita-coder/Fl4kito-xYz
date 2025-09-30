@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME-PLAY SOCIETY - Votre plateforme de gaming</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+</head>
+<body>
+    <!-- Page d'accueil (visible sans connexion) -->
+    <div id="home-page" class="page active">
+        <header class="home-header">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <span>GAME-PLAY SOCIETY</span>
+                </div>
+                <p class="slogan">Votre plateforme de gaming ultime</p>
+            </div>
+            <button id="login-btn" class="btn-login">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </header>
+
+        <main class="home-main">
+            <section class="hero-section">
+                <h1>Bienvenue sur <span class="highlight">GAME-PLAY SOCIETY</span></h1>
+                <p>La plateforme de gaming qui révolutionne votre expérience de jeu</p>
+                <div class="cta-buttons">
+                    <button id="hero-login-btn" class="btn-primary">Se connecter</button>
+                    <button id="hero-register-btn" class="btn-secondary">Créer un compte</button>
+                </div>
+            </section>
+
+            <section class="services-preview">
+                <h2>Nos Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-coins"></i>
+                        <h3>Top Up Gaming</h3>
+                        <p>Rechargez vos jeux favoris comme Free Fire, Call of Duty et plus encore</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-film"></i>
+                        <h3>Streaming</h3>
+                        <p>Abonnements Netflix et autres services de streaming premium</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Services Financiers</h3>
+                        <p>Recharge Paypal, achat crypto-monnaie et services financiers</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="home-footer">
+            <p>&copy; 2024 GAME-PLAY SOCIETY. Tous droits réservés.</p>
+        </footer>
+    </div>
+
+    <!-- Page de connexion -->
+    <div id="login-page" class="page">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>GAME-PLAY SOCIETY</h1>
+                <p>Connectez-vous à votre compte</p>
+            </div>
+            
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">Mot de passe</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                
+                <button type="submit" class="btn-primary">Se connecter</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Pas de compte? <a href="#" id="go-to-register">S'inscrire</a></p>
+                <a href="#" id="back-to-home"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page d'inscription -->
+    <div id="register-page" class="page">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>GAME-PLAY SOCIETY</h1>
+                <p>Créez votre compte</p>
+            </div>
+            
+            <form id="register-form" class="auth-form">
+                <div class="name-group">
+                    <div class="form-group">
+                        <label for="first-name">Prénom</label>
+                        <input type="text" id="first-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Nom</label>
+                        <input type="text" id="last-name" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="whatsapp">Numéro de WhatsApp</label>
+                    <input type="tel" id="whatsapp" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-password">Mot de passe (8 caractères minimum)</label>
+                    <input type="password" id="register-password" minlength="8" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirmer le mot de passe</label>
+                    <input type="password" id="confirm-password" required>
+                </div>
+                
+                <button type="submit" class="btn-primary">Créer un compte</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Déjà un compte? <a href="#" id="go-to-login">Se connecter</a></p>
+                <a href="#" id="back-to-home-register"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page principale après connexion -->
+    <div id="main-page" class="page">
+        <!-- Menu latéral -->
+        <div id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <span>GAME-PLAY SOCIETY</span>
+                </div>
+            </div>
+            
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-details">
+                    <span id="user-name">Nom Utilisateur</span>
+                    <span id="user-email">email@example.com</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Accueil</span>
+                </a>
+                <a href="#" class="nav-item" data-page="gaming">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Recharge de jeux</span>
+                </a>
+                <a href="#" class="nav-item" data-page="streaming">
+                    <i class="fas fa-film"></i>
+                    <span>Streaming</span>
+                </a>
+                <a href="#" class="nav-item" data-page="financial">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Services Financiers</span>
+                </a>
+                <a href="#" class="nav-item" data-page="wallet">
+                    <i class="fas fa-wallet"></i>
+                    <span>Portefeuille</span>
+                </a>
+                <a href="#" class="nav-item" data-page="orders">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Commandes</span>
+                </a>
+                <a href="#" class="nav-item" data-page="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profil</span>
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètres</span>
+                </a>
+                <!-- Menu Admin sera ajouté dynamiquement -->
+                <a href="#" id="logout-btn" class="nav-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Contenu principal -->
+        <div class="main-content">
+            <!-- Header avec bouton menu -->
+            <header class="content-header">
+                <button id="menu-toggle" class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 id="page-title">Tableau de bord</h1>
+                <!-- Bouton de retour au menu principal -->
+                <button id="back-to-dashboard" class="btn-back" style="display: none;">
+                    <i class="fas fa-arrow-left"></i> Retour au menu
+                </button>
+            </header>
+
+            <!-- Contenu des pages -->
+            <div class="page-content">
+                <!-- Tableau de bord -->
+                <div id="dashboard" class="content-section active">
+                    <div class="welcome-banner">
+                        <h2>Bienvenue sur GAME-PLAY SOCIETY</h2>
+                        <p>Choisissez un service pour commencer</p>
+                    </div>
+                    
+                    <div class="services-grid-main">
+                        <div class="service-card-main" data-service="gaming">
+                            <div class="service-icon">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <h3>Top Up Gaming</h3>
+                            <p>Rechargez vos jeux mobiles favoris</p>
+                            <button class="btn-service">Explorer</button>
+                        </div>
+                        
+                        <div class="service-card-main" data-service="streaming">
+                            <div class="service-icon">
+                                <i class="fas fa-film"></i>
+                            </div>
+                            <h3>Streaming</h3>
+                            <p>Abonnements aux services de streaming</p>
+                            <button class="btn-service">Explorer</button>
+                        </div>
+                        
+                        <div class="service-card-main" data-service="financial">
+                            <div class="service-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Services Financiers</h3>
+                            <p>Services financiers et paiements</p>
+                            <button class="btn-service">Explorer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Recharge de jeux -->
+                <div id="gaming" class="content-section">
+                    <div class="page-header">
+                        <h2>Recharge de Jeux</h2>
+                        <div class="search-bar">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Rechercher des jeux...">
+                        </div>
+                    </div>
+                    
+                    <div class="game-filters">
+                        <button class="filter-btn active">Tous les Jeux</button>
+                        <button class="filter-btn">PC</button>
+                        <button class="filter-btn">Console</button>
+                        <button class="filter-btn">Mobile</button>
+                    </div>
+
+                    <div class="games-section">
+                        <h3 class="section-label">Mobile</h3>
+                        <div class="games-grid">
+                            <!-- Free Fire -->
+                            <div class="game-card">
+                                <div class="game-header">
+                                    <img src="images/freefire-logo.png" alt="Free Fire" class="game-logo">
+                                    <div class="game-info">
+                                        <h3>Free Fire - Diamants</h3>
+                                        <p class="price">À partir de 157 HTG</p>
+                                    </div>
+                                </div>
+                                <div class="game-actions">
+                                    <button class="btn-outline view-products" data-game="freefire">Voir</button>
+                                    <button class="btn-primary add-to-cart" data-product="100 Diamants" data-price="157" data-game="Free Fire">Panier</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Call of Duty -->
+                            <div class="game-card">
+                                <div class="game-header">
+                                    <img src="images/cod-logo.png" alt="Call of Duty" class="game-logo">
+                                    <div class="game-info">
+                                        <h3>Call of Duty - CP</h3>
+                                        <p class="price">À partir de 180 HTG</p>
+                                    </div>
+                                </div>
+                                <div class="game-actions">
+                                    <button class="btn-outline view-products" data-game="cod">Voir</button>
+                                    <button class="btn-primary add-to-cart" data-product="80 CP" data-price="180" data-game="Call of Duty">Panier</button>
+                                </div>
+                            </div>
+                            
+                            <!-- DLS 2025 -->
+                            <div class="game-card">
+                                <div class="game-header">
+                                    <img src="images/dls-logo.png" alt="DLS 2025" class="game-logo">
+                                    <div class="game-info">
+                                        <h3>DLS - Jetons</h3>
+                                        <p class="price">À partir de 340 HTG</p>
+                                    </div>
+                                </div>
+                                <div class="game-actions">
+                                    <button class="btn-outline view-products" data-game="dls">Voir</button>
+                                    <button class="btn-primary add-to-cart" data-product="900 Jetons" data-price="340" data-game="DLS">Panier</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Blood Strike -->
+                            <div class="game-card">
+                                <div class="game-header">
+                                    <img src="images/bloodstrike-logo.png" alt="Blood Strike" class="game-logo">
+                                    <div class="game-info">
+                                        <h3>Blood Strike - Gold</h3>
+                                        <p class="price">À partir de 170 HTG</p>
+                                    </div>
+                                </div>
+                                <div class="game-actions">
+                                    <button class="btn-outline view-products" data-game="bloodstrike">Voir</button>
+                                    <button class="btn-primary add-to-cart" data-product="16 Gold" data-price="170" data-game="Blood Strike">Panier</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Streaming -->
+                <div id="streaming" class="content-section">
+                    <h2>Services de Streaming</h2>
+                    <div class="info-message">
+                        <i class="fas fa-info-circle"></i>
+                        <p>Les services de streaming ne sont pas encore disponibles. Revenez bientôt!</p>
+                    </div>
+                </div>
+
+                <!-- Page Services Financiers -->
+                <div id="financial" class="content-section">
+                    <h2>Services Financiers</h2>
+                    <p class="page-subtitle">Choisissez votre service financier préféré</p>
+                    
+                    <div class="financial-services-grid">
+                        <!-- Wise -->
+                        <div class="financial-card">
+                            <div class="financial-header">
+                                <div class="financial-logo">
+                                    <img src="images/wise-logo.png" alt="Wise" class="service-logo">
+                                </div>
+                                <h3>Wise</h3>
+                            </div>
+                            <p>Envoyez et recevez de l'argent facilement avec Wise</p>
+                            <button class="btn-outline view-financial" data-service="wise">Voir plus</button>
+                        </div>
+                        
+                        <!-- PayPal -->
+                        <div class="financial-card">
+                            <div class="financial-header">
+                                <div class="financial-logo">
+                                    <img src="images/paypal-logo.png" alt="PayPal" class="service-logo">
+                                </div>
+                                <h3>PayPal</h3>
+                            </div>
+                            <p>Rechargez votre compte PayPal en toute sécurité</p>
+                            <button class="btn-outline view-financial" data-service="paypal">Voir plus</button>
+                        </div>
+                        
+                        <!-- USDT -->
+                        <div class="financial-card">
+                            <div class="financial-header">
+                                <div class="financial-logo">
+                                    <img src="images/usdt-logo.png" alt="USDT" class="service-logo">
+                                </div>
+                                <h3>USDT</h3>
+                            </div>
+                            <p>Achetez des USDT pour vos transactions crypto</p>
+                            <button class="btn-outline view-financial" data-service="usdt">Voir plus</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Portefeuille -->
+                <div id="wallet" class="content-section">
+                    <div class="wallet-header">
+                        <h2>Portefeuille</h2>
+                        <button class="btn-refresh">
+                            <i class="fas fa-sync-alt"></i> Actualiser
+                        </button>
+                    </div>
+                    
+                    <div class="wallet-balance">
+                        <h3>Mon Portefeuille</h3>
+                        <div class="balance-amount">
+                            <span class="currency">HTG</span>
+                            <span class="amount" id="wallet-amount">0,00</span>
+                        </div>
+                        <div class="wallet-actions">
+                            <button class="btn-primary" id="deposit-btn">
+                                <i class="fas fa-plus"></i> Dépôt
+                            </button>
+                            <button class="btn-outline" id="withdraw-btn">
+                                <i class="fas fa-minus"></i> Retrait
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="transactions-section">
+                        <div class="transaction-filters">
+                            <button class="filter-btn active">Toutes les transactions</button>
+                            <button class="filter-btn">Dépôts</button>
+                            <button class="filter-btn">Achats</button>
+                            <button class="filter-btn">Retraits</button>
+                        </div>
+                        
+                        <div class="transactions-list">
+                            <h3>Transactions Récentes</h3>
+                            <div class="no-transactions">
+                                <p>Aucune transaction pour le moment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Commandes -->
+                <div id="orders" class="content-section">
+                    <div class="orders-header">
+                        <h2>Mes Commandes</h2>
+                        <div class="orders-search">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Rechercher par ID, produit ou...">
+                            <button class="btn-refresh">
+                                <i class="fas fa-sync-alt"></i> Actualiser
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="orders-filters">
+                        <button class="order-filter active" data-status="all">
+                            Toutes <span class="count">0</span>
+                        </button>
+                        <button class="order-filter" data-status="pending">
+                            En attente <span class="count">0</span>
+                        </button>
+                        <button class="order-filter" data-status="completed">
+                            Terminées <span class="count">0</span>
+                        </button>
+                        <button class="order-filter" data-status="failed">
+                            Échouées <span class="count">0</span>
+                        </button>
+                    </div>
+                    
+                    <div class="orders-list">
+                        <div class="no-orders">
+                            <p>Vous n'avez pas encore passé de commande dans cette catégorie.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Profil -->
+                <div id="profile" class="content-section">
+                    <div class="profile-tabs">
+                        <button class="profile-tab active" data-tab="personal">Informations Personnelles</button>
+                        <button class="profile-tab" data-tab="security">Sécurité</button>
+                        <button class="profile-tab" data-tab="notifications">Notifications</button>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <!-- Informations Personnelles -->
+                        <div id="personal-tab" class="tab-pane active">
+                            <h3>Informations Personnelles</h3>
+                            <p>Mettez à jour vos informations personnelles ici. Ces informations seront affichées sur votre profil.</p>
+                            
+                            <form class="profile-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="profile-firstname">Prénom</label>
+                                        <input type="text" id="profile-firstname">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profile-lastname">Nom</label>
+                                        <input type="text" id="profile-lastname">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="profile-email">Email</label>
+                                    <input type="email" id="profile-email">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="profile-phone">Téléphone</label>
+                                    <input type="tel" id="profile-phone" placeholder="Entrez votre numéro de téléphone">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="profile-address">Adresse</label>
+                                    <input type="text" id="profile-address" placeholder="Entrez votre adresse">
+                                </div>
+                                
+                                <button type="submit" class="btn-primary">Sauvegarder</button>
+                            </form>
+                        </div>
+                        
+                        <!-- Sécurité -->
+                        <div id="security-tab" class="tab-pane">
+                            <h3>Sécurité</h3>
+                            <p>Mettez à jour votre mot de passe et gérez la sécurité de votre compte.</p>
+                            
+                            <form class="security-form">
+                                <div class="form-group">
+                                    <label for="current-password">Mot de passe actuel</label>
+                                    <input type="password" id="current-password" placeholder="Entrez votre mot de passe actuel">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="new-password">Nouveau mot de passe</label>
+                                    <input type="password" id="new-password" placeholder="Entrez votre nouveau mot de passe">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="confirm-new-password">Confirmer le nouveau mot de passe</label>
+                                    <input type="password" id="confirm-new-password" placeholder="Confirmez votre nouveau mot de passe">
+                                </div>
+                                
+                                <button type="submit" class="btn-primary">Mettre à jour le mot de passe</button>
+                            </form>
+                            
+                            <div class="security-features">
+                                <h4>Authentification à deux facteurs</h4>
+                                <p>Ajoutez une couche de sécurité supplémentaire à votre compte.</p>
+                                <button class="btn-outline">Activer la 2FA</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Notifications -->
+                        <div id="notifications-tab" class="tab-pane">
+                            <h3>Préférences de Notifications</h3>
+                            <p>Gérez la façon dont vous recevez les notifications et les mises à jour.</p>
+                            
+                            <div class="notification-settings">
+                                <h4>Notifications par Email</h4>
+                                
+                                <div class="setting-item">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <div class="setting-info">
+                                        <strong>Mises à jour de commande</strong>
+                                        <p>Recevez des notifications sur le statut de vos commandes</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-item">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <div class="setting-info">
+                                        <strong>Promotions et offres</strong>
+                                        <p>Recevez des offres, réductions et contenu promotionnel</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Paramètres -->
+                <div id="settings" class="content-section">
+                    <h2>Paramètres</h2>
+                    
+                    <div class="settings-grid">
+                        <!-- Apparence -->
+                        <div class="settings-card">
+                            <h3>Apparence</h3>
+                            <p>Personnalisez l'apparence de l'application</p>
+                            
+                            <div class="setting-group">
+                                <label>Thème</label>
+                                <div class="theme-options">
+                                    <label class="theme-option">
+                                        <input type="radio" name="theme" value="light">
+                                        <span class="theme-preview light"></span>
+                                        <span>Clair</span>
+                                    </label>
+                                    <label class="theme-option">
+                                        <input type="radio" name="theme" value="dark" checked>
+                                        <span class="theme-preview dark"></span>
+                                        <span>Sombre</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Préférences -->
+                        <div class="settings-card">
+                            <h3>Préférences</h3>
+                            <p>Configurez les préférences de votre compte</p>
+                            
+                            <div class="setting-item">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <div class="setting-info">
+                                    <strong>Reçus par email</strong>
+                                    <p>Recevez des reçus pour toutes les transactions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Admin (cachée pour les utilisateurs normaux) -->
+                <div id="admin-section" class="content-section">
+                    <div class="admin-header">
+                        <h2><i class="fas fa-shield-alt"></i> Administration</h2>
+                        <p>Gestion des commandes et utilisateurs</p>
+                    </div>
+
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Utilisateurs</h3>
+                                <span class="stat-number" id="total-users">0</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Commandes</h3>
+                                <span class="stat-number" id="total-orders">0</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Revenus</h3>
+                                <span class="stat-number" id="total-revenue">0 HTG</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-tabs">
+                        <button class="admin-tab active" data-tab="orders">Commandes en Attente</button>
+                        <button class="admin-tab" data-tab="users">Utilisateurs</button>
+                        <button class="admin-tab" data-tab="transactions">Transactions</button>
+                    </div>
+
+                    <div class="admin-content">
+                        <!-- Commandes en attente -->
+                        <div id="admin-orders" class="admin-tab-content active">
+                            <div class="table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>N° Commande</th>
+                                            <th>Utilisateur</th>
+                                            <th>Produits</th>
+                                            <th>Montant</th>
+                                            <th>Date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="orders-table-body">
+                                        <!-- Les commandes seront chargées ici -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Utilisateurs -->
+                        <div id="admin-users" class="admin-tab-content">
+                            <div class="table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Email</th>
+                                            <th>Téléphone</th>
+                                            <th>Date d'inscription</th>
+                                            <th>Commandes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="users-table-body">
+                                        <!-- Les utilisateurs seront chargés ici -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Transactions -->
+                        <div id="admin-transactions" class="admin-tab-content">
+                            <div class="table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Utilisateur</th>
+                                            <th>Montant</th>
+                                            <th>Méthode</th>
+                                            <th>Statut</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="transactions-table-body">
+                                        <!-- Les transactions seront chargées ici -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal des produits de jeux -->
+    <div id="game-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-title">Produits</h2>
+            <div id="game-description" class="game-description"></div>
+            <div class="products-tabs">
+                <button class="product-tab active" data-tab="packs">Packs</button>
+                <button class="product-tab" data-tab="subscriptions">Abonnements</button>
+                <button class="product-tab" data-tab="passes">Passes</button>
+            </div>
+            <div id="modal-products" class="products-list"></div>
+        </div>
+    </div>
+
+    <!-- Modal services financiers -->
+    <div id="financial-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="financial-modal-title">Service Financier</h2>
+            <div id="financial-description" class="service-description"></div>
+            
+            <div class="amount-selection">
+                <h3>Choisir un montant</h3>
+                <p>Sélectionnez un montant à...</p>
+                <div id="amount-options" class="amount-options"></div>
+            </div>
+            
+            <form id="financial-order-form" class="order-form">
+                <h3>Informations du compte</h3>
+                <div id="financial-form-fields"></div>
+                <button type="submit" class="btn-primary">Ajouter au panier</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal recharge portefeuille -->
+    <div id="deposit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Recharge Compte</h2>
+            <p>Rechargez votre portefeuille en sélectionnant une méthode de paiement</p>
+            
+            <form id="deposit-form" class="deposit-form">
+                <div class="form-group">
+                    <label>Méthode de paiement</label>
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <input type="radio" id="deposit-moncash" name="deposit-method" value="moncash" checked>
+                            <label for="deposit-moncash">
+                                <img src="images/moncash-logo.png" alt="MonCash" class="payment-logo">
+                                <span>MonCash</span>
+                            </label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="deposit-natcash" name="deposit-method" value="natcash">
+                            <label for="deposit-natcash">
+                                <img src="images/natcash-logo.png" alt="NatCash" class="payment-logo">
+                                <span>NatCash</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="deposit-details" class="payment-details">
+                    <div class="payment-info">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="payment-info-content">
+                            <h4>MonCash</h4>
+                            <p>Nom: Marcco Bien Aimé</p>
+                            <p>Numéro: +50939442808</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="deposit-amount">Montant (HTG) - Minimum 100 HTG</label>
+                    <input type="number" id="deposit-amount" min="100" required placeholder="Entrez le montant">
+                </div>
+                
+                <div class="form-group">
+                    <label for="deposit-email">Email de votre compte</label>
+                    <input type="email" id="deposit-email" required placeholder="Entrez votre email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="deposit-proof">Preuve de paiement (Image)</label>
+                    <div class="file-upload">
+                        <input type="file" id="deposit-proof" accept="image/*" required>
+                        <label for="deposit-proof" class="file-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Choisir une image</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Soumettre</button>
+                    <button type="button" class="btn-outline cancel-deposit">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal retrait portefeuille -->
+    <div id="withdraw-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Retrait de fonds</h2>
+            <p>Retirez des fonds de votre portefeuille</p>
+            
+            <form id="withdraw-form" class="withdraw-form">
+                <div class="form-group">
+                    <label>Méthode de retrait</label>
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <input type="radio" id="withdraw-moncash" name="withdraw-method" value="moncash" checked>
+                            <label for="withdraw-moncash">
+                                <img src="images/moncash-logo.png" alt="MonCash" class="payment-logo">
+                                <span>MonCash</span>
+                            </label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="withdraw-natcash" name="withdraw-method" value="natcash">
+                            <label for="withdraw-natcash">
+                                <img src="images/natcash-logo.png" alt="NatCash" class="payment-logo">
+                                <span>NatCash</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="withdraw-amount">Montant (HTG)</label>
+                    <input type="number" id="withdraw-amount" min="100" required placeholder="Entrez le montant">
+                    <p class="balance-info">Solde disponible: <span id="available-balance">0,00</span> HTG</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="withdraw-phone">Informations de retrait (Numéro de téléphone)</label>
+                    <input type="tel" id="withdraw-phone" required placeholder="Entrez vos informations de retrait...">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Soumettre</button>
+                    <button type="button" class="btn-outline cancel-withdraw">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Panier d'achat -->
+    <div id="cart" class="cart">
+        <div class="cart-header">
+            <h3>Mon Panier</h3>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-items">
+            <div class="no-items">Aucun article dans votre panier</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                Total: <span id="cart-total">0</span> HTG
+            </div>
+            <button id="checkout-btn" class="btn-primary" disabled>Procéder au paiement</button>
+        </div>
+    </div>
+
+    <!-- Modal de paiement -->
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Finaliser la Commande</h2>
+            
+            <div class="order-summary">
+                <h3>Récapitulatif de la commande</h3>
+                <div id="payment-items"></div>
+                <div class="order-total">
+                    Total: <span id="payment-total">0</span> HTG
+                </div>
+            </div>
+
+            <form id="payment-form" class="payment-form">
+                <div class="form-group">
+                    <label for="player-id">ID Joueur / Compte</label>
+                    <input type="text" id="player-id" required placeholder="Votre ID de jeu ou compte">
+                </div>
+
+                <div class="form-group">
+                    <label>Méthode de Paiement</label>
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <input type="radio" id="payment-moncash" name="payment-method" value="moncash" checked>
+                            <label for="payment-moncash">
+                                <img src="images/moncash-logo.png" alt="MonCash" class="payment-logo">
+                                <span>MonCash</span>
+                            </label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="payment-natcash" name="payment-method" value="natcash">
+                            <label for="payment-natcash">
+                                <img src="images/natcash-logo.png" alt="NatCash" class="payment-logo">
+                                <span>NatCash</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="payment-details" class="payment-details">
+                    <div class="payment-info">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="payment-info-content">
+                            <h4>MonCash</h4>
+                            <p>Nom: Marcco Bien Aimé</p>
+                            <p>Numéro: +50939442808</p>
+                            <p>Effectuez le paiement et prenez une capture d'écran</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment-proof">Preuve de paiement (Capture d'écran)</label>
+                    <div class="file-upload">
+                        <input type="file" id="payment-proof" accept="image/*" required>
+                        <label for="payment-proof" class="file-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Choisir une image</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="special-notes">Notes spéciales (optionnel)</label>
+                    <textarea id="special-notes" placeholder="Informations supplémentaires..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary btn-pay">
+                    <i class="fas fa-lock"></i>
+                    Confirmer la Commande
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation de commande -->
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content confirmation-content">
+            <div class="confirmation-header">
+                <i class="fas fa-check-circle"></i>
+                <h2>Commande Confirmée!</h2>
+            </div>
+            <div class="confirmation-body">
+                <p>Votre commande a été passée avec succès.</p>
+                <div class="order-info">
+                    <p><strong>Numéro de commande:</strong> <span id="order-number">GPS-001</span></p>
+                    <p><strong>Total:</strong> <span id="order-total-confirm">0</span> HTG</p>
+                    <p><strong>Statut:</strong> <span class="status-pending">En attente de validation</span></p>
+                </div>
+                <div class="payment-instructions" id="payment-instructions">
+                    <h4>Instructions importantes:</h4>
+                    <p>Votre commande sera traitée après vérification du paiement. Vous recevrez une notification.</p>
+                </div>
+            </div>
+            <div class="confirmation-footer">
+                <button id="view-orders-btn" class="btn-primary">Voir mes commandes</button>
+                <button id="new-order-btn" class="btn-secondary">Nouvelle commande</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal détail commande admin -->
+    <div id="admin-order-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Détails de la Commande</h2>
+            
+            <div class="order-details">
+                <div class="detail-section">
+                    <h3>Informations de la Commande</h3>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <label>Numéro de commande:</label>
+                            <span id="admin-order-id">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Date:</label>
+                            <span id="admin-order-date">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Statut:</label>
+                            <span id="admin-order-status" class="status-pending">En attente</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Total:</label>
+                            <span id="admin-order-total">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Informations de l'Utilisateur</h3>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <label>Nom complet:</label>
+                            <span id="admin-user-name">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Email:</label>
+                            <span id="admin-user-email">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Téléphone:</label>
+                            <span id="admin-user-phone">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Détails du Paiement</h3>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <label>Méthode de paiement:</label>
+                            <span id="admin-payment-method">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Nom MonCash:</label>
+                            <span id="admin-moncash-name">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Numéro MonCash:</label>
+                            <span id="admin-moncash-phone">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Montant envoyé:</label>
+                            <span id="admin-amount-sent">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>ID Compte Free Fire:</label>
+                            <span id="admin-player-id">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Preuve de Paiement</h3>
+                    <div id="admin-payment-proof">
+                        <!-- L'image de preuve sera chargée ici -->
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Produits Commandés</h3>
+                    <div id="admin-order-items">
+                        <!-- Les produits seront listés ici -->
+                    </div>
+                </div>
+
+                <div class="order-actions">
+                    <button class="btn-success" id="approve-order">
+                        <i class="fas fa-check"></i> Approuver la commande
+                    </button>
+                    <button class="btn-danger" id="reject-order">
+                        <i class="fas fa-times"></i> Rejeter la commande
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bouton panier flottant -->
+    <div id="cart-button" class="cart-button">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+    </div>
+
+    <!-- Notifications -->
+    <div id="notification" class="notification"></div>
+
+    <script src="main.js"></script>
+</body>
+</html>
