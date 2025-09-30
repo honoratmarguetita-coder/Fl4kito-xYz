@@ -705,7 +705,8 @@
                                             <th>Email</th>
                                             <th>Montant</th>
                                             <th>Méthode</th>
-                                            <th>Email Compte</th>
+                                            <th>Numéro Compte</th>
+                                            <th>Nom Compte</th>
                                             <th>Preuve</th>
                                             <th>Actions</th>
                                         </tr>
@@ -800,70 +801,36 @@
     </div>
 
     <!-- Modal recharge portefeuille -->
-<div id="deposit-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2>Recharge Compte</h2>
-        <p>Rechargez votre portefeuille en sélectionnant une méthode de paiement</p>
-        
-        <form id="deposit-form" class="deposit-form">
-            <div class="form-group">
-                <label>Méthode de paiement</label>
-                <div class="payment-methods">
-                    <div class="payment-method">
-                        <input type="radio" id="deposit-moncash" name="deposit-method" value="moncash" checked>
-                        <label for="deposit-moncash">
-                            <img src="images/moncash-logo.png" alt="MonCash" class="payment-logo">
-                            <span>MonCash</span>
-                        </label>
-                    </div>
-                    <div class="payment-method">
-                        <input type="radio" id="deposit-natcash" name="deposit-method" value="natcash">
-                        <label for="deposit-natcash">
-                            <img src="images/natcash-logo.png" alt="NatCash" class="payment-logo">
-                            <span>NatCash</span>
-                        </label>
+    <div id="deposit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Recharge Compte</h2>
+            <p>Rechargez votre portefeuille en sélectionnant une méthode de paiement</p>
+            
+            <form id="deposit-form" class="deposit-form">
+                <div class="form-group">
+                    <label>Méthode de paiement</label>
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <input type="radio" id="deposit-moncash" name="deposit-method" value="moncash" checked>
+                            <label for="deposit-moncash">
+                                <img src="images/moncash-logo.png" alt="MonCash" class="payment-logo">
+                                <span>MonCash</span>
+                            </label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="deposit-natcash" name="deposit-method" value="natcash">
+                            <label for="deposit-natcash">
+                                <img src="images/natcash-logo.png" alt="NatCash" class="payment-logo">
+                                <span>NatCash</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div id="deposit-details" class="payment-details">
-                <!-- Les informations seront mises à jour dynamiquement -->
-            </div>
-            
-            <div class="form-group">
-                <label for="deposit-amount">Montant (HTG) - Minimum 150 HTG</label>
-                <input type="number" id="deposit-amount" min="150" required placeholder="Entrez le montant">
-            </div>
-            
-            <div class="form-group">
-                <label for="deposit-phone">Numéro du compte</label>
-                <input type="tel" id="deposit-phone" required placeholder="Entrez votre numéro de compte">
-            </div>
-            
-            <div class="form-group">
-                <label for="deposit-name">Nom du compte</label>
-                <input type="text" id="deposit-name" required placeholder="Entrez le nom du compte">
-            </div>
-            
-            <div class="form-group">
-                <label for="deposit-proof">Preuve de paiement (Image)</label>
-                <div class="file-upload">
-                    <input type="file" id="deposit-proof" accept="image/*" required>
-                    <label for="deposit-proof" class="file-label">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <span>Choisir une image</span>
-                    </label>
+                
+                <div id="deposit-details" class="payment-details">
+                    <!-- Les informations seront mises à jour dynamiquement -->
                 </div>
-            </div>
-            
-            <div class="form-actions">
-                <button type="submit" class="btn-primary">Soumettre</button>
-                <button type="button" class="btn-outline cancel-deposit">Annuler</button>
-            </div>
-        </form>
-    </div>
-</div>
                 
                 <div class="form-group">
                     <label for="deposit-amount">Montant (HTG) - Minimum 150 HTG</label>
@@ -871,8 +838,13 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="deposit-email">Email de votre compte</label>
-                    <input type="email" id="deposit-email" required placeholder="Entrez votre email">
+                    <label for="deposit-phone">Numéro du compte</label>
+                    <input type="tel" id="deposit-phone" required placeholder="Entrez votre numéro de compte">
+                </div>
+                
+                <div class="form-group">
+                    <label for="deposit-name">Nom du compte</label>
+                    <input type="text" id="deposit-name" required placeholder="Entrez le nom du compte">
                 </div>
                 
                 <div class="form-group">
@@ -999,15 +971,7 @@
                 </div>
 
                 <div id="payment-details" class="payment-details">
-                    <div class="payment-info">
-                        <i class="fas fa-info-circle"></i>
-                        <div class="payment-info-content">
-                            <h4>MonCash</h4>
-                            <p>Nom: Marcco Bien Aimé</p>
-                            <p>Numéro: +50939442808</p>
-                            <p>Effectuez le paiement et prenez une capture d'écran</p>
-                        </div>
-                    </div>
+                    <!-- Les informations seront mises à jour dynamiquement -->
                 </div>
 
                 <div class="form-group">
