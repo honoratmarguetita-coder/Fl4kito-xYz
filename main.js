@@ -312,10 +312,6 @@ function setupEventListeners() {
     // Formulaires
     document.getElementById('deposit-form').addEventListener('submit', handleDeposit);
     document.getElementById('withdraw-form').addEventListener('submit', handleWithdraw);
-    document.getElementById('financial-order-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        handleFinancialOrder();
-    });
 
     // Panier
     document.getElementById('cart-button').addEventListener('click', toggleCart);
@@ -357,14 +353,6 @@ function setupEventListeners() {
     // Modals
     document.querySelectorAll('.close-modal').forEach(closeBtn => {
         closeBtn.addEventListener('click', closeAllModals);
-    });
-
-    // Onglets produits
-    document.querySelectorAll('.product-tab').forEach(tab => {
-        tab.addEventListener('click', function() {
-            const tabName = this.dataset.tab;
-            showGameProductsTab(tabName);
-        });
     });
 
     // Thème
@@ -961,6 +949,22 @@ async function loadUserData() {
 }
 
 // Gestion du panier
+function addToCart(productName, price, game) {
+    const cartItem = {
+        id: Date.now().toString(),
+        name: productName,
+        price: price,
+        game: game,
+        quantity: 1,
+        type: 'game'
+    };
+    
+    cart.push(cartItem);
+    updateCartUI();
+    saveCartToStorage();
+    showNotification('Produit ajouté au panier', 'success');
+}
+
 function updateCartUI() {
     const cartCount = document.getElementById('cart-count');
     const cartItems = document.querySelector('.cart-items');
@@ -1078,8 +1082,7 @@ async function handleDeposit(e) {
     }
     
     const amount = parseInt(document.getElementById('deposit-amount').value);
-    const phone = document.getElementById('deposit-phone').value;
-    const accountName = document.getElementById('deposit-name').value;
+    const email = document.getElementById('deposit-email').value;
     const method = document.querySelector('input[name="deposit-method"]:checked').value;
     const proofFile = document.getElementById('deposit-proof').files[0];
     
@@ -1105,8 +1108,7 @@ async function handleDeposit(e) {
             type: 'deposit',
             amount: amount,
             method: method,
-            phone: phone,
-            accountName: accountName,
+            email: email,
             proofUrl: proofUrl,
             status: 'pending',
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -1484,7 +1486,7 @@ async function loadPendingDeposits() {
         if (depositsSnapshot.empty) {
             depositsTable.innerHTML = `
                 <tr>
-                    <td colspan="8" style="text-align: center; color: var(--gray-color);">
+                    <td colspan="7" style="text-align: center; color: var(--gray-color);">
                         Aucun dépôt en attente
                     </td>
                 </tr>
@@ -1503,8 +1505,7 @@ async function loadPendingDeposits() {
                 <td>${userData.email}</td>
                 <td>${deposit.amount} HTG</td>
                 <td>${deposit.method}</td>
-                <td>${deposit.phone}</td>
-                <td>${deposit.accountName}</td>
+                <td>${deposit.email}</td>
                 <td>
                     <button class="btn-outline view-deposit-proof" data-deposit-id="${doc.id}" data-proof-url="${deposit.proofUrl}">
                         <i class="fas fa-eye"></i> Voir preuve
