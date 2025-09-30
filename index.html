@@ -705,8 +705,7 @@
                                             <th>Email</th>
                                             <th>Montant</th>
                                             <th>Méthode</th>
-                                            <th>Numéro Compte</th>
-                                            <th>Nom Compte</th>
+                                            <th>Email Compte</th>
                                             <th>Preuve</th>
                                             <th>Actions</th>
                                         </tr>
@@ -829,7 +828,14 @@
                 </div>
                 
                 <div id="deposit-details" class="payment-details">
-                    <!-- Les informations seront mises à jour dynamiquement -->
+                    <div class="payment-info">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="payment-info-content">
+                            <h4>MonCash</h4>
+                            <p>Nom: Marcco Bien Aimé</p>
+                            <p>Numéro: +50939442808</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="form-group">
@@ -838,13 +844,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="deposit-phone">Numéro du compte</label>
-                    <input type="tel" id="deposit-phone" required placeholder="Entrez votre numéro de compte">
-                </div>
-                
-                <div class="form-group">
-                    <label for="deposit-name">Nom du compte</label>
-                    <input type="text" id="deposit-name" required placeholder="Entrez le nom du compte">
+                    <label for="deposit-email">Email de votre compte</label>
+                    <input type="email" id="deposit-email" required placeholder="Entrez votre email">
                 </div>
                 
                 <div class="form-group">
@@ -971,7 +972,15 @@
                 </div>
 
                 <div id="payment-details" class="payment-details">
-                    <!-- Les informations seront mises à jour dynamiquement -->
+                    <div class="payment-info">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="payment-info-content">
+                            <h4>MonCash</h4>
+                            <p>Nom: Marcco Bien Aimé</p>
+                            <p>Numéro: +50939442808</p>
+                            <p>Effectuez le paiement et prenez une capture d'écran</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
