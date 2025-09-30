@@ -630,7 +630,7 @@
                 </div>
 
                 <!-- Section Admin (cachée pour les utilisateurs normaux) -->
-                <div id="admin-section" class="content-section">
+                <div id="admin" class="content-section">
                     <div class="admin-header">
                         <h2><i class="fas fa-shield-alt"></i> Administration</h2>
                         <p>Gestion des commandes et utilisateurs</p>
@@ -668,6 +668,7 @@
 
                     <div class="admin-tabs">
                         <button class="admin-tab active" data-tab="orders">Commandes en Attente</button>
+                        <button class="admin-tab" data-tab="deposits">Dépôts en Attente</button>
                         <button class="admin-tab" data-tab="users">Utilisateurs</button>
                         <button class="admin-tab" data-tab="transactions">Transactions</button>
                     </div>
@@ -689,6 +690,28 @@
                                     </thead>
                                     <tbody id="orders-table-body">
                                         <!-- Les commandes seront chargées ici -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Dépôts en attente -->
+                        <div id="admin-deposits" class="admin-tab-content">
+                            <div class="table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Utilisateur</th>
+                                            <th>Email</th>
+                                            <th>Montant</th>
+                                            <th>Méthode</th>
+                                            <th>Email Compte</th>
+                                            <th>Preuve</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="deposits-table-body">
+                                        <!-- Les dépôts seront chargés ici -->
                                     </tbody>
                                 </table>
                             </div>
@@ -747,9 +770,9 @@
             <h2 id="modal-title">Produits</h2>
             <div id="game-description" class="game-description"></div>
             <div class="products-tabs">
-                <button class="product-tab active" data-tab="packs">Packs</button>
+                <button class="product-tab active" data-tab="packs">Packs de Diamants</button>
                 <button class="product-tab" data-tab="subscriptions">Abonnements</button>
-                <button class="product-tab" data-tab="passes">Passes</button>
+                <button class="product-tab" data-tab="passes">Special VIP Pass</button>
             </div>
             <div id="modal-products" class="products-list"></div>
         </div>
@@ -764,7 +787,7 @@
             
             <div class="amount-selection">
                 <h3>Choisir un montant</h3>
-                <p>Sélectionnez un montant à...</p>
+                <p>Sélectionnez un montant à recharger</p>
                 <div id="amount-options" class="amount-options"></div>
             </div>
             
@@ -816,8 +839,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="deposit-amount">Montant (HTG) - Minimum 100 HTG</label>
-                    <input type="number" id="deposit-amount" min="100" required placeholder="Entrez le montant">
+                    <label for="deposit-amount">Montant (HTG) - Minimum 150 HTG</label>
+                    <input type="number" id="deposit-amount" min="150" required placeholder="Entrez le montant">
                 </div>
                 
                 <div class="form-group">
@@ -1065,19 +1088,7 @@
                             <span id="admin-payment-method">-</span>
                         </div>
                         <div class="detail-item">
-                            <label>Nom MonCash:</label>
-                            <span id="admin-moncash-name">-</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Numéro MonCash:</label>
-                            <span id="admin-moncash-phone">-</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Montant envoyé:</label>
-                            <span id="admin-amount-sent">-</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>ID Compte Free Fire:</label>
+                            <label>ID Compte:</label>
                             <span id="admin-player-id">-</span>
                         </div>
                     </div>
