@@ -1082,7 +1082,8 @@ async function handleDeposit(e) {
     }
     
     const amount = parseInt(document.getElementById('deposit-amount').value);
-    const email = document.getElementById('deposit-email').value;
+    const phone = document.getElementById('deposit-phone').value;
+    const accountName = document.getElementById('deposit-name').value;
     const method = document.querySelector('input[name="deposit-method"]:checked').value;
     const proofFile = document.getElementById('deposit-proof').files[0];
     
@@ -1108,7 +1109,8 @@ async function handleDeposit(e) {
             type: 'deposit',
             amount: amount,
             method: method,
-            email: email,
+            phone: phone,
+            accountName: accountName,
             proofUrl: proofUrl,
             status: 'pending',
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -1124,6 +1126,7 @@ async function handleDeposit(e) {
         console.error('Erreur lors du dépôt:', error);
         showNotification('Erreur lors du dépôt', 'error');
     }
+}
 }
 
 async function handleWithdraw(e) {
