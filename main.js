@@ -219,6 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupEventListeners();
     checkAuthState();
     loadTheme();
+    initImagePlaceholders();
 });
 
 function initApp() {
@@ -300,7 +301,7 @@ function setupEventListeners() {
     document.getElementById('withdraw-btn').addEventListener('click', showWithdrawModal);
     document.querySelector('.btn-refresh').addEventListener('click', refreshWallet);
 
-    // Paiements
+    // Paiements - CORRECTION: Ajout des écouteurs manquants
     document.querySelectorAll('input[name="deposit-method"]').forEach(radio => {
         radio.addEventListener('change', updateDepositDetails);
     });
@@ -388,6 +389,11 @@ function handleLogin(e) {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
 
+    if (!email || !password) {
+        showNotification('Veuillez remplir tous les champs', 'error');
+        return;
+    }
+
     showLoading(true);
     
     auth.signInWithEmailAndPassword(email, password)
@@ -395,7 +401,23 @@ function handleLogin(e) {
             showNotification('Connexion réussie!', 'success');
         })
         .catch((error) => {
-            showNotification('Erreur de connexion: ' + error.message, 'error');
+            console.error('Erreur de connexion:', error);
+            let errorMessage = 'Erreur de connexion';
+            switch(error.code) {
+                case 'auth/invalid-email':
+                    errorMessage = 'Email invalide';
+                    break;
+                case 'auth/user-not-found':
+                    errorMessage = 'Utilisateur non trouvé';
+                    break;
+                case 'auth/wrong-password':
+                    errorMessage = 'Mot de passe incorrect';
+                    break;
+                case 'auth/too-many-requests':
+                    errorMessage = 'Trop de tentatives. Réessayez plus tard';
+                    break;
+            }
+            showNotification(errorMessage, 'error');
         })
         .finally(() => {
             showLoading(false);
@@ -411,8 +433,19 @@ function handleRegister(e) {
     const password = document.getElementById('register-password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
 
+    // Validation
+    if (!firstName || !lastName || !email || !whatsapp || !password || !confirmPassword) {
+        showNotification('Veuillez remplir tous les champs', 'error');
+        return;
+    }
+
     if (password !== confirmPassword) {
         showNotification('Les mots de passe ne correspondent pas', 'error');
+        return;
+    }
+
+    if (password.length < 8) {
+        showNotification('Le mot de passe doit contenir au moins 8 caractères', 'error');
         return;
     }
 
@@ -427,78 +460,24 @@ function handleRegister(e) {
                 email: email,
                 whatsapp: whatsapp,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                balance: 0
+                balance: 0,
+                lastLogin: firebase.firestore.FieldValue.serverTimestamp()
             });
         })
         .then(() => {
             showNotification('Compte créé avec succès!', 'success');
+            // Redirection automatique après inscription
+            setTimeout(() => {
+                showMainApp();
+            }, 1500);
         })
         .catch((error) => {
-            showNotification('Erreur lors de la création: ' + error.message, 'error');
-        })
-        .finally(() => {
-            showLoading(false);
-        });
-}
-
-function handleLogout() {
-    auth.signOut().then(() => {
-        showNotification('Déconnexion réussie', 'success');
-        cart = [];
-        updateCartUI();
-        saveCartToStorage();
-    });
-}
-
-// Navigation
-function showHomePage() {
-    showPage('home-page');
-}
-
-function showLoginPage() {
-    showPage('login-page');
-}
-
-function showRegisterPage() {
-    showPage('register-page');
-}
-
-function showMainApp() {
-    showPage('main-page');
-    showPage('dashboard');
-}
-
-function showPage(pageId) {
-    // Cacher toutes les pages
-    document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-    });
-    
-    // Cacher toutes les sections de contenu
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.classList.remove('active');
-    });
-
-    // Afficher la page demandée
-    const targetPage = document.getElementById(pageId);
-    if (targetPage) {
-        targetPage.classList.add('active');
-        
-        // Mettre à jour le titre de la page
-        const pageTitle = document.getElementById('page-title');
-        if (pageTitle) {
-            const pageNames = {
-                'dashboard': 'Tableau de bord',
-                'gaming': 'Recharge de Jeux',
-                'streaming': 'Services de Streaming',
-                'financial': 'Services Financiers',
-                'wallet': 'Portefeuille',
-                'orders': 'Mes Commandes',
-                'profile': 'Mon Profil',
-                'settings': 'Paramètres'
-            };
-            pageTitle.textContent = pageNames[pageId] || 'GAME-PLAY SOCIETY';
-        }
-
-        // Gérer l'affichage du bouton de retour
-        const back
+            console.error('Erreur inscription:', error);
+            let errorMessage = 'Erreur lors de la création du compte';
+            switch(error.code) {
+                case 'auth/email-already-in-use':
+                    errorMessage = 'Cet email est déjà utilisé';
+                    break;
+                case 'auth/invalid-email':
+                    errorMessage = 'Email invalide';
+                    b
