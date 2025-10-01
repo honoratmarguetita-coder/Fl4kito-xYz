@@ -1,409 +1,1026 @@
-<!DOCTYPE html>  <html lang="fr">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>GAME-PLAY SOCIETY - Votre plateforme de gaming</title>  
-    <link rel="stylesheet" href="style.css">  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">  
-    <!-- Firebase SDK -->  
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>  
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>  
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>  
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>  
-</head>  
-<body>  
-    <!-- Page d'accueil (visible sans connexion) -->  
-    <div id="home-page" class="page active">  
-        <header class="home-header">  
-            <div class="logo-container">  
-                <div class="logo">  
-                    <i class="fas fa-gamepad"></i>  
-                    <span>GAME-PLAY SOCIETY</span>  
-                </div>  
-                <p class="slogan">Votre plateforme de gaming ultime</p>  
-            </div>  
-            <button id="login-btn" class="btn-login">  
-                <i class="fas fa-sign-in-alt"></i> Login  
-            </button>  
-        </header>  <main class="home-main">  
-        <section class="hero-section">  
-            <h1>Bienvenue sur <span class="highlight">GAME-PLAY SOCIETY</span></h1>  
-            <p>La plateforme de gaming qui révolutionne votre expérience de jeu</p>  
-            <div class="cta-buttons">  
-                <button id="hero-login-btn" class="btn-primary">Se connecter</button>  
-                <button id="hero-register-btn" class="btn-secondary">Créer un compte</button>  
-            </div>  
-        </section>  
+/* Variables CSS */
+:root {
+--primary-color: #6a11cb;
+--secondary-color: #2575fc;
+--accent-color: #ff3e6c;
+--dark-color: #1a1a2e;
+--light-color: #f8f9fa;
+--success-color: #28a745;
+--warning-color: #ffc107;
+--danger-color: #dc3545;
+--gray-color: #6c757d;
+--border-radius: 8px;
+--box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+--transition: all 0.3s ease;
+}
 
-        <section class="services-preview">  
-            <h2>Nos Services</h2>  
-            <div class="services-grid">  
-                <div class="service-card">  
-                    <i class="fas fa-coins"></i>  
-                    <h3>Top Up Gaming</h3>  
-                    <p>Rechargez vos jeux favoris comme Free Fire, Call of Duty et plus encore</p>  
-                </div>  
-                <div class="service-card">  
-                    <i class="fas fa-film"></i>  
-                    <h3>Streaming</h3>  
-                    <p>Abonnements Netflix et autres services de streaming premium</p>  
-                </div>  
-                <div class="service-card">  
-                    <i class="fas fa-chart-line"></i>  
-                    <h3>Services Financiers</h3>  
-                    <p>Recharge Paypal, achat crypto-monnaie et services financiers</p>  
-                </div>  
-            </div>  
-        </section>  
-    </main>  
+/* Reset et styles de base */
 
-    <footer class="home-footer">  
-        <p>&copy; 2024 GAME-PLAY SOCIETY. Tous droits réservés.</p>  
-    </footer>  
-</div>  
+{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 
-<!-- Page de connexion -->  
-<div id="login-page" class="page">  
-    <div class="auth-container">  
-        <div class="auth-header">  
-            <h1>GAME-PLAY SOCIETY</h1>  
-            <p>Connectez-vous à votre compte</p>  
-        </div>  
-          
-        <form id="login-form" class="auth-form">  
-            <div class="form-group">  
-                <label for="login-email">Email</label>  
-                <input type="email" id="login-email" required>  
-            </div>  
-              
-            <div class="form-group">  
-                <label for="login-password">Mot de passe</label>  
-                <input type="password" id="login-password" required>  
-            </div>  
-              
-            <button type="submit" class="btn-primary">Se connecter</button>  
-        </form>  
-          
-        <div class="auth-footer">  
-            <p>Pas de compte? <a href="#" id="go-to-register">S'inscrire</a></p>  
-            <a href="#" id="back-to-home"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>  
-        </div>  
-    </div>  
-</div>  
 
-<!-- Page d'inscription -->  
-<div id="register-page" class="page">  
-    <div class="auth-container">  
-        <div class="auth-header">  
-            <h1>GAME-PLAY SOCIETY</h1>  
-            <p>Créez votre compte</p>  
-        </div>  
-          
-        <form id="register-form" class="auth-form">  
-            <div class="name-group">  
-                <div class="form-group">  
-                    <label for="first-name">Prénom</label>  
-                    <input type="text" id="first-name" required>  
-                </div>  
-                <div class="form-group">  
-                    <label for="last-name">Nom</label>  
-                    <input type="text" id="last-name" required>  
-                </div>  
-            </div>  
-              
-            <div class="form-group">  
-                <label for="register-email">Email</label>  
-                <input type="email" id="register-email" required>  
-            </div>  
-              
-            <div class="form-group">  
-                <label for="whatsapp">Numéro de WhatsApp</label>  
-                <input type="tel" id="whatsapp" required>  
-            </div>  
-              
-            <div class="form-group">  
-                <label for="register-password">Mot de passe (8 caractères minimum)</label>  
-                <input type="password" id="register-password" minlength="8" required>  
-            </div>  
-              
-            <div class="form-group">  
-                <label for="confirm-password">Confirmer le mot de passe</label>  
-                <input type="password" id="confirm-password" required>  
-            </div>  
-              
-            <button type="submit" class="btn-primary">Créer un compte</button>  
-        </form>  
-          
-        <div class="auth-footer">  
-            <p>Déjà un compte? <a href="#" id="go-to-login">Se connecter</a></p>  
-            <a href="#" id="back-to-home-register"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>  
-        </div>  
-    </div>  
-</div>  
+body {
+font-family: 'Montserrat', sans-serif;
+background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+color: var(--light-color);
+line-height: 1.6;
+overflow-x: hidden;
+}
 
-<!-- Page principale après connexion -->  
-<div id="main-page" class="page">  
-    <!-- Menu latéral -->  
-    <div id="sidebar" class="sidebar">  
-        <div class="sidebar-header">  
-            <div class="logo">  
-                <i class="fas fa-gamepad"></i>  
-                <span>GAME-PLAY SOCIETY</span>  
-            </div>  
-        </div>  
-          
-        <div class="user-info">  
-            <div class="user-avatar">  
-                <i class="fas fa-user"></i>  
-            </div>  
-            <div class="user-details">  
-                <span id="user-name">Nom Utilisateur</span>  
-                <span id="user-email">email@example.com</span>  
-            </div>  
-        </div>  
-          
-        <nav class="sidebar-nav">  
-            <a href="#" class="nav-item active" data-page="dashboard">  
-                <i class="fas fa-home"></i>  
-                <span>Accueil</span>  
-            </a>  
-            <a href="#" class="nav-item" data-page="gaming">  
-                <i class="fas fa-gamepad"></i>  
-                <span>Recharge de jeux</span>  
-            </a>  
-            <a href="#" class="nav-item" data-page="streaming">  
-                <i class="fas fa-film"></i>  
-                <span>Streaming</span>  
-            </a>  
-            <a href="#" class="nav-item" data-page="financial">  
-                <i class="fas fa-chart-line"></i>  
-                <span>Services Financiers</span>  
-            </a>  
-            <a href="#" class="nav-item" data-page="wallet">  
-                <i class="fas fa-wallet"></i>  
-                <span>Portefeuille</span>  
-            </a>  
-            <a href="#" class="nav-item" data-page="orders">  
-                <i class="fas fa-shopping-cart"></i>  
-                <span>Commandes</span>  
-            </a>  
-            <a href="#" class="nav-item" data-page="profile">  
-                <i class="fas fa-user"></i>  
-                <span>Profil</span>  
-            </a>  
-            <a href="#" class="nav-item" data-page="settings">  
-                <i class="fas fa-cog"></i>  
-                <span>Paramètres</span>  
-            </a>  
-            <!-- Menu Admin sera ajouté dynamiquement -->  
-            <a href="#" id="logout-btn" class="nav-item logout">  
-                <i class="fas fa-sign-out-alt"></i>  
-                <span>Déconnexion</span>  
-            </a>  
-        </nav>  
-    </div>  
+/* Pages */
+.page {
+display: none;
+min-height: 100vh;
+}
 
-    <!-- Contenu principal -->  
-    <div class="main-content">  
-        <!-- Header avec bouton menu -->  
-        <header class="content-header">  
-            <button id="menu-toggle" class="menu-toggle">  
-                <i class="fas fa-bars"></i>  
-            </button>  
-            <h1 id="page-title">Tableau de bord</h1>  
-            <!-- Bouton de retour au menu principal -->  
-            <button id="back-to-dashboard" class="btn-back" style="display: none;">  
-                <i class="fas fa-arrow-left"></i> Retour au menu  
-            </button>  
-        </header>  
+.page.active {
+display: block;
+}
 
-        <!-- Contenu des pages -->  
-        <div class="page-content">  
-            <!-- Tableau de bord -->  
-            <div id="dashboard" class="content-section active">  
-                <div class="welcome-banner">  
-                    <h2>Bienvenue sur GAME-PLAY SOCIETY</h2>  
-                    <p>Choisissez un service pour commencer</p>  
-                </div>  
-                  
-                <div class="services-grid-main">  
-                    <div class="service-card-main" data-service="gaming">  
-                        <div class="service-icon">  
-                            <i class="fas fa-coins"></i>  
-                        </div>  
-                        <h3>Top Up Gaming</h3>  
-                        <p>Rechargez vos jeux mobiles favoris</p>  
-                        <button class="btn-service">Explorer</button>  
-                    </div>  
-                      
-                    <div class="service-card-main" data-service="streaming">  
-                        <div class="service-icon">  
-                            <i class="fas fa-film"></i>  
-                        </div>  
-                        <h3>Streaming</h3>  
-                        <p>Abonnements aux services de streaming</p>  
-                        <button class="btn-service">Explorer</button>  
-                    </div>  
-                      
-                    <div class="service-card-main" data-service="financial">  
-                        <div class="service-icon">  
-                            <i class="fas fa-chart-line"></i>  
-                        </div>  
-                        <h3>Services Financiers</h3>  
-                        <p>Services financiers et paiements</p>  
-                        <button class="btn-service">Explorer</button>  
-                    </div>  
-                </div>  
-            </div>  
+/* Styles pour les logos */
+.game-logo {
+width: 48px;
+height: 48px;
+border-radius: var(--border-radius);
+object-fit: contain;
+margin-right: 1rem;
+}
 
-            <!-- Page Recharge de jeux -->  
-            <div id="gaming" class="content-section">  
-                <div class="page-header">  
-                    <h2>Recharge de Jeux</h2>  
-                    <div class="search-bar">  
-                        <i class="fas fa-search"></i>  
-                        <input type="text" placeholder="Rechercher des jeux...">  
-                    </div>  
-                </div>  
-                  
-                <div class="game-filters">  
-                    <button class="filter-btn active">Tous les Jeux</button>  
-                    <button class="filter-btn">PC</button>  
-                    <button class="filter-btn">Console</button>  
-                    <button class="filter-btn">Mobile</button>  
-                </div>  
+.service-logo {
+width: 56px;
+height: 56px;
+border-radius: var(--border-radius);
+object-fit: contain;
+}
 
-                <div class="games-section">  
-                    <h3 class="section-label">Mobile</h3>  
-                    <div class="games-grid">  
-                        <!-- Free Fire -->  
-                        <div class="game-card">  
-                            <div class="game-header">  
-                                <img src="images/freefire-logo.png" alt="Free Fire" class="game-logo">  
-                                <div class="game-info">  
-                                    <h3>Free Fire - Diamants</h3>  
-                                    <p class="price">À partir de 157 HTG</p>  
-                                </div>  
-                            </div>  
-                            <div class="game-actions">  
-                                <button class="btn-outline view-products" data-game="freefire">Voir</button>  
-                                <button class="btn-primary add-to-cart" data-product="100 Diamants" data-price="157" data-game="Free Fire">Panier</button>  
-                            </div>  
-                        </div>  
-                          
-                        <!-- Call of Duty -->  
-                        <div class="game-card">  
-                            <div class="game-header">  
-                                <img src="images/cod-logo.png" alt="Call of Duty" class="game-logo">  
-                                <div class="game-info">  
-                                    <h3>Call of Duty - CP</h3>  
-                                    <p class="price">À partir de 180 HTG</p>  
-                                </div>  
-                            </div>  
-                            <div class="game-actions">  
-                                <button class="btn-outline view-products" data-game="cod">Voir</button>  
-                                <button class="btn-primary add-to-cart" data-product="80 CP" data-price="180" data-game="Call of Duty">Panier</button>  
-                            </div>  
-                        </div>  
-                          
-                        <!-- DLS 2025 -->  
-                        <div class="game-card">  
-                            <div class="game-header">  
-                                <img src="images/dls-logo.png" alt="DLS 2025" class="game-logo">  
-                                <div class="game-info">  
-                                    <h3>DLS - Jetons</h3>  
-                                    <p class="price">À partir de 340 HTG</p>  
-                                </div>  
-                            </div>  
-                            <div class="game-actions">  
-                                <button class="btn-outline view-products" data-game="dls">Voir</button>  
-                                <button class="btn-primary add-to-cart" data-product="900 Jetons" data-price="340" data-game="DLS">Panier</button>  
-                            </div>  
-                        </div>  
-                          
-                        <!-- Blood Strike -->  
-                        <div class="game-card">  
-                            <div class="game-header">  
-                                <img src="images/bloodstrike-logo.png" alt="Blood Strike" class="game-logo">  
-                                <div class="game-info">  
-                                    <h3>Blood Strike - Gold</h3>  
-                                    <p class="price">À partir de 170 HTG</p>  
-                                </div>  
-                            </div>  
-                            <div class="game-actions">  
-                                <button class="btn-outline view-products" data-game="bloodstrike">Voir</button>  
-                                <button class="btn-primary add-to-cart" data-product="16 Gold" data-price="170" data-game="Blood Strike">Panier</button>  
-                            </div>  
-                        </div>  
-                    </div>  
-                </div>  
-            </div>  
+.payment-logo {
+width: 40px;
+height: 40px;
+object-fit: contain;
+margin-bottom: 0.5rem;
+}
 
-            <!-- Page Streaming -->  
-            <div id="streaming" class="content-section">  
-                <h2>Services de Streaming</h2>  
-                <div class="info-message">  
-                    <i class="fas fa-info-circle"></i>  
-                    <p>Les services de streaming ne sont pas encore disponibles. Revenez bientôt!</p>  
-                </div>  
-            </div>  
+/* Bouton de retour */
+.btn-back {
+background: rgba(255, 255, 255, 0.1);
+border: 1px solid rgba(255, 255, 255, 0.2);
+color: var(--light-color);
+padding: 0.7rem 1.5rem;
+border-radius: var(--border-radius);
+cursor: pointer;
+transition: var(--transition);
+display: flex;
+align-items: center;
+gap: 0.5rem;
+font-weight: 600;
+}
 
-            <!-- Page Services Financiers -->  
-            <div id="financial" class="content-section">  
-                <h2>Services Financiers</h2>  
-                <p class="page-subtitle">Choisissez votre service financier préféré</p>  
-                  
-                <div class="financial-services-grid">  
-                    <!-- Wise -->  
-                    <div class="financial-card">  
-                        <div class="financial-header">  
-                            <div class="financial-logo">  
-                                <img src="images/wise-logo.png" alt="Wise" class="service-logo">  
-                            </div>  
-                            <h3>Wise</h3>  
-                        </div>  
-                        <p>Envoyez et recevez de l'argent facilement avec Wise</p>  
-                        <button class="btn-outline view-financial" data-service="wise">Voir plus</button>  
-                    </div>  
-                      
-                    <!-- PayPal -->  
-                    <div class="financial-card">  
-                        <div class="financial-header">  
-                            <div class="financial-logo">  
-                                <img src="images/paypal-logo.png" alt="PayPal" class="service-logo">  
-                            </div>  
-                            <h3>PayPal</h3>  
-                        </div>  
-                        <p>Rechargez votre compte PayPal en toute sécurité</p>  
-                        <button class="btn-outline view-financial" data-service="paypal">Voir plus</button>  
-                    </div>  
-                      
-                    <!-- USDT -->  
-                    <div class="financial-card">  
-                        <div class="financial-header">  
-                            <div class="financial-logo">  
-                                <img src="images/usdt-logo.png" alt="USDT" class="service-logo">  
-                            </div>  
-                            <h3>USDT</h3>  
-                        </div>  
-                        <p>Achetez des USDT pour vos transactions crypto</p>  
-                        <button class="btn-outline view-financial" data-service="usdt">Voir plus</button>  
-                    </div>  
-                </div>  
-            </div>  
+.btn-back:hover {
+background: rgba(255, 255, 255, 0.2);
+transform: translateY(-2px);
+}
 
-            <!-- Page Portefeuille -->  
-            <div id="wallet" class="content-section">  
-                <div class="wallet-header">  
-                    <h2>Portefeuille</h2>  
-                    <button class="btn-refresh">  
-                        <i class="fas fa-sync-alt"></i> Actualiser  
-                    </button>  
-                </div>  
-                  
-                <div class="wallet-balance">  
-                    <h3>Mon Portefeuille</h3>  
-                    <div class="balance-amount">  
-                        <span class="currency">HTG</sp
+/* Header du contenu */
+.content-header {
+display: flex;
+align-items: center;
+padding: 1rem 2rem;
+background: rgba(26, 26, 46, 0.9);
+backdrop-filter: blur(10px);
+position: sticky;
+top: 0;
+z-index: 100;
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+gap: 1rem;
+}
+
+.content-header h1 {
+flex: 1;
+font-family: 'Orbitron', sans-serif;
+font-size: 1.8rem;
+}
+
+/* Page d'accueil */
+.home-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1rem 2rem;
+background: rgba(26, 26, 46, 0.9);
+backdrop-filter: blur(10px);
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+z-index: 1000;
+}
+
+.logo-container {
+display: flex;
+flex-direction: column;
+}
+
+.logo {
+display: flex;
+align-items: center;
+font-family: 'Orbitron', sans-serif;
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--light-color);
+}
+
+.logo i {
+color: var(--accent-color);
+margin-right: 0.5rem;
+font-size: 1.8rem;
+}
+
+.slogan {
+font-size: 0.9rem;
+color: var(--gray-color);
+margin-top: 0.2rem;
+}
+
+.btn-login {
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+color: white;
+border: none;
+padding: 0.7rem 1.5rem;
+border-radius: var(--border-radius);
+font-weight: 600;
+cursor: pointer;
+transition: var(--transition);
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.btn-login:hover {
+transform: translateY(-2px);
+box-shadow: 0 6px 12px rgba(106, 17, 203, 0.3);
+}
+
+.home-main {
+padding-top: 100px;
+min-height: 100vh;
+}
+
+.hero-section {
+text-align: center;
+padding: 4rem 2rem;
+background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.9));
+border-radius: 0 0 50px 50px;
+margin-bottom: 3rem;
+}
+
+.hero-section h1 {
+font-size: 3rem;
+margin-bottom: 1rem;
+font-family: 'Orbitron', sans-serif;
+}
+
+.highlight {
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.hero-section p {
+font-size: 1.2rem;
+margin-bottom: 2rem;
+color: var(--gray-color);
+}
+
+.cta-buttons {
+display: flex;
+justify-content: center;
+gap: 1rem;
+flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary, .btn-outline {
+padding: 1rem 2rem;
+border: none;
+border-radius: var(--border-radius);
+font-weight: 600;
+cursor: pointer;
+transition: var(--transition);
+font-size: 1rem;
+}
+
+.btn-primary {
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+color: white;
+}
+
+.btn-secondary {
+background: transparent;
+color: var(--light-color);
+border: 2px solid var(--primary-color);
+}
+
+.btn-outline {
+background: transparent;
+color: var(--light-color);
+border: 1px solid var(--gray-color);
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-outline:hover {
+transform: translateY(-2px);
+box-shadow: 0 6px 12px rgba(106, 17, 203, 0.3);
+}
+
+.btn-outline:hover {
+border-color: var(--primary-color);
+}
+
+.services-preview {
+padding: 0 2rem 4rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.services-preview h2 {
+text-align: center;
+font-size: 2.5rem;
+margin-bottom: 3rem;
+font-family: 'Orbitron', sans-serif;
+}
+
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+}
+
+.service-card {
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+padding: 2rem;
+border-radius: var(--border-radius);
+text-align: center;
+transition: var(--transition);
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.service-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.service-card i {
+font-size: 3rem;
+color: var(--accent-color);
+margin-bottom: 1rem;
+}
+
+.service-card h3 {
+font-size: 1.5rem;
+margin-bottom: 1rem;
+}
+
+.service-card p {
+color: var(--gray-color);
+}
+
+.home-footer {
+text-align: center;
+padding: 2rem;
+background: rgba(26, 26, 46, 0.9);
+color: var(--gray-color);
+}
+
+/* Pages d'authentification */
+.auth-container {
+max-width: 500px;
+margin: 2rem auto;
+padding: 2rem;
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border-radius: var(--border-radius);
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-header {
+text-align: center;
+margin-bottom: 2rem;
+}
+
+.auth-header h1 {
+font-family: 'Orbitron', sans-serif;
+font-size: 2.5rem;
+margin-bottom: 0.5rem;
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.auth-header p {
+color: var(--gray-color);
+}
+
+.auth-form {
+margin-bottom: 2rem;
+}
+
+.name-group {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1rem;
+}
+
+.form-group {
+margin-bottom: 1.5rem;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 0.5rem;
+font-weight: 600;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+width: 100%;
+padding: 0.8rem;
+border: 1px solid rgba(255, 255, 255, 0.2);
+border-radius: var(--border-radius);
+background: rgba(255, 255, 255, 0.05);
+color: var(--light-color);
+font-size: 1rem;
+transition: var(--transition);
+}
+
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+outline: none;
+border-color: var(--primary-color);
+box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.2);
+}
+
+.auth-footer {
+text-align: center;
+}
+
+.auth-footer a {
+color: var(--primary-color);
+text-decoration: none;
+transition: var(--transition);
+}
+
+.auth-footer a:hover {
+color: var(--secondary-color);
+}
+
+/* Page principale après connexion */
+#main-page {
+display: flex;
+min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+width: 280px;
+background: rgba(26, 26, 46, 0.95);
+backdrop-filter: blur(10px);
+padding: 1.5rem;
+position: fixed;
+height: 100vh;
+overflow-y: auto;
+transition: var(--transition);
+z-index: 1000;
+border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header {
+margin-bottom: 2rem;
+}
+
+.sidebar .logo {
+font-size: 1.2rem;
+}
+
+.user-info {
+display: flex;
+align-items: center;
+margin-bottom: 2rem;
+padding: 1rem;
+background: rgba(255, 255, 255, 0.05);
+border-radius: var(--border-radius);
+}
+
+.user-avatar {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+display: flex;
+align-items: center;
+justify-content: center;
+margin-right: 1rem;
+}
+
+.user-avatar i {
+font-size: 1.5rem;
+color: white;
+}
+
+.user-details {
+display: flex;
+flex-direction: column;
+}
+
+.user-details span:first-child {
+font-weight: 600;
+}
+
+.user-details span:last-child {
+font-size: 0.8rem;
+color: var(--gray-color);
+}
+
+.sidebar-nav {
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+}
+
+.nav-item {
+display: flex;
+align-items: center;
+padding: 1rem;
+color: var(--light-color);
+text-decoration: none;
+border-radius: var(--border-radius);
+transition: var(--transition);
+gap: 0.8rem;
+}
+
+.nav-item:hover {
+background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item.active {
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.nav-item.logout {
+margin-top: auto;
+color: var(--danger-color);
+}
+
+.nav-item.logout:hover {
+background: rgba(220, 53, 69, 0.1);
+}
+
+/* Contenu principal */
+.main-content {
+flex: 1;
+margin-left: 280px;
+min-height: 100vh;
+}
+
+.menu-toggle {
+background: none;
+border: none;
+color: var(--light-color);
+font-size: 1.5rem;
+cursor: pointer;
+margin-right: 1rem;
+display: none;
+}
+
+.page-content {
+padding: 2rem;
+}
+
+.content-section {
+display: none;
+}
+
+.content-section.active {
+display: block;
+}
+
+/* Services sur le tableau de bord */
+.welcome-banner {
+text-align: center;
+margin-bottom: 3rem;
+padding: 2rem;
+background: linear-gradient(135deg, rgba(106, 17, 203, 0.1), rgba(37, 117, 252, 0.1));
+border-radius: var(--border-radius);
+}
+
+.services-grid-main {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+}
+
+.service-card-main {
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+padding: 2rem;
+border-radius: var(--border-radius);
+text-align: center;
+transition: var(--transition);
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.service-card-main:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.service-icon {
+width: 80px;
+height: 80px;
+border-radius: 50%;
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 0 auto 1.5rem;
+}
+
+.service-icon i {
+font-size: 2rem;
+color: white;
+}
+
+.service-card-main h3 {
+font-size: 1.5rem;
+margin-bottom: 1rem;
+}
+
+.service-card-main p {
+color: var(--gray-color);
+margin-bottom: 1.5rem;
+}
+
+.btn-service {
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+color: white;
+border: none;
+padding: 0.8rem 1.5rem;
+border-radius: var(--border-radius);
+font-weight: 600;
+cursor: pointer;
+transition: var(--transition);
+}
+
+.btn-service:hover {
+transform: translateY(-2px);
+box-shadow: 0 6px 12px rgba(106, 17, 203, 0.3);
+}
+
+/* Page des jeux */
+.page-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 2rem;
+flex-wrap: wrap;
+gap: 1rem;
+}
+
+.search-bar {
+position: relative;
+display: flex;
+align-items: center;
+background: rgba(255, 255, 255, 0.05);
+border-radius: var(--border-radius);
+padding: 0.5rem 1rem;
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-bar i {
+color: var(--gray-color);
+margin-right: 0.5rem;
+}
+
+.search-bar input {
+background: none;
+border: none;
+color: var(--light-color);
+outline: none;
+width: 250px;
+}
+
+.game-filters {
+display: flex;
+gap: 1rem;
+margin-bottom: 2rem;
+flex-wrap: wrap;
+}
+
+.filter-btn {
+padding: 0.7rem 1.5rem;
+background: rgba(255, 255, 255, 0.05);
+border: 1px solid rgba(255, 255, 255, 0.1);
+border-radius: var(--border-radius);
+color: var(--light-color);
+cursor: pointer;
+transition: var(--transition);
+}
+
+.filter-btn.active, .filter-btn:hover {
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+border-color: transparent;
+}
+
+.games-section {
+margin-bottom: 3rem;
+}
+
+.section-label {
+font-size: 1.2rem;
+margin-bottom: 1rem;
+color: var(--gray-color);
+padding: 0.5rem 0;
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.games-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 1.5rem;
+}
+
+.game-card {
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+padding: 1.5rem;
+border-radius: var(--border-radius);
+border: 1px solid rgba(255, 255, 255, 0.1);
+transition: var(--transition);
+}
+
+.game-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.game-header {
+display: flex;
+align-items: center;
+margin-bottom: 1rem;
+}
+
+.game-info h3 {
+font-size: 1.1rem;
+margin-bottom: 0.3rem;
+}
+
+.price {
+color: var(--accent-color);
+font-weight: 600;
+font-size: 0.9rem;
+}
+
+.game-actions {
+display: flex;
+gap: 0.8rem;
+}
+
+.game-actions .btn-outline, .game-actions .btn-primary {
+padding: 0.6rem 1.2rem;
+font-size: 0.9rem;
+flex: 1;
+}
+
+/* Services financiers */
+.page-subtitle {
+color: var(--gray-color);
+margin-bottom: 2rem;
+font-size: 1.1rem;
+}
+
+.financial-services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+gap: 2rem;
+}
+
+.financial-card {
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+padding: 2rem;
+border-radius: var(--border-radius);
+border: 1px solid rgba(255, 255, 255, 0.1);
+transition: var(--transition);
+}
+
+.financial-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.financial-header {
+display: flex;
+align-items: center;
+margin-bottom: 1rem;
+}
+
+.financial-logo {
+width: 56px;
+height: 56px;
+border-radius: var(--border-radius);
+background: rgba(255, 255, 255, 0.1);
+display: flex;
+align-items: center;
+justify-content: center;
+margin-right: 1rem;
+}
+
+.financial-card h3 {
+font-size: 1.3rem;
+margin-bottom: 0.5rem;
+}
+
+.financial-card p {
+color: var(--gray-color);
+margin-bottom: 1.5rem;
+line-height: 1.5;
+}
+
+/* Portefeuille */
+.wallet-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 2rem;
+flex-wrap: wrap;
+gap: 1rem;
+}
+
+.btn-refresh {
+background: rgba(255, 255, 255, 0.05);
+border: 1px solid rgba(255, 255, 255, 0.1);
+color: var(--light-color);
+padding: 0.7rem 1.5rem;
+border-radius: var(--border-radius);
+cursor: pointer;
+transition: var(--transition);
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.btn-refresh:hover {
+background: rgba(255, 255, 255, 0.1);
+}
+
+.wallet-balance {
+background: rgba(255, 255, 255, 0.05);
+padding: 2rem;
+border-radius: var(--border-radius);
+border: 1px solid rgba(255, 255, 255, 0.1);
+margin-bottom: 2rem;
+text-align: center;
+}
+
+.wallet-balance h3 {
+margin-bottom: 1rem;
+color: var(--gray-color);
+}
+
+.balance-amount {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 0.5rem;
+margin-bottom: 2rem;
+}
+
+.currency {
+font-size: 1.5rem;
+color: var(--gray-color);
+}
+
+.amount {
+font-size: 3rem;
+font-weight: 700;
+color: var(--accent-color);
+font-family: 'Orbitron', sans-serif;
+}
+
+.wallet-actions {
+display: flex;
+gap: 1rem;
+justify-content: center;
+}
+
+.wallet-actions .btn-primary, .wallet-actions .btn-outline {
+padding: 1rem 2rem;
+min-width: 120px;
+}
+
+.transactions-section {
+background: rgba(255, 255, 255, 0.05);
+border-radius: var(--border-radius);
+border: 1px solid rgba(255, 255, 255, 0.1);
+overflow: hidden;
+}
+
+.transaction-filters {
+display: flex;
+background: rgba(26, 26, 46, 0.9);
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+flex-wrap: wrap;
+}
+
+.transaction-filters .filter-btn {
+flex: 1;
+min-width: 120px;
+text-align: center;
+}
+
+.transactions-list {
+padding: 2rem;
+}
+
+.transactions-list h3 {
+margin-bottom: 1rem;
+color: var(--gray-color);
+}
+
+.no-transactions, .no-orders {
+text-align: center;
+padding: 3rem;
+color: var(--gray-color);
+}
+
+/* Commandes */
+.orders-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 2rem;
+flex-wrap: wrap;
+gap: 1rem;
+}
+
+.orders-search {
+display: flex;
+align-items: center;
+gap: 1rem;
+flex-wrap: wrap;
+}
+
+.orders-search .search-bar {
+flex: 1;
+min-width: 300px;
+}
+
+.orders-filters {
+display: flex;
+gap: 1rem;
+margin-bottom: 2rem;
+flex-wrap: wrap;
+}
+
+.order-filter {
+padding: 1rem 1.5rem;
+background: rgba(255, 255, 255, 0.05);
+border: 1px solid rgba(255, 255, 255, 0.1);
+border-radius: var(--border-radius);
+color: var(--light-color);
+cursor: pointer;
+transition: var(--transition);
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.order-filter.active, .order-filter:hover {
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+border-color: transparent;
+}
+
+.order-filter .count {
+background: rgba(255, 255, 255, 0.2);
+padding: 0.2rem 0.5rem;
+border-radius: 12px;
+font-size: 0.8rem;
+}
+
+/* Profil */
+.profile-tabs {
+display: flex;
+background: rgba(255, 255, 255, 0.05);
+border-radius: var(--border-radius);
+border: 1px solid rgba(255, 255, 255, 0.1);
+margin-bottom: 2rem;
+overflow: hidden;
+}
+
+.profile-tab {
+flex: 1;
+padding: 1rem 1.5rem;
+background: none;
+border: none;
+color: var(--light-color);
+cursor: pointer;
+transition: var(--transition);
+text-align: center;
+}
+
+.profile-tab.active, .profile-tab:hover {
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.tab-content {
+background: rgba(255, 255, 255, 0.05);
+border-radius: var(--border-radius);
+border: 1px solid rgba(255, 255, 255, 0.1);
+padding: 2rem;
+}
+
+.tab-pane {
+display: none;
+}
+
+.tab-pane.active {
+display: block;
+}
+
+.tab-pane h3 {
+margin-bottom: 1rem;
+color: var(--accent-color);
+}
+
+.tab-pane p {
+color: var(--gray-color);
+margin-bottom: 2rem;
+}
+
+.form-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1rem;
+}
+
+.profile-form, .security-form {
+max-width: 600px;
+}
+
+.security-features {
+margin-top: 2rem;
+padding-top: 2rem;
+border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.security-features h4 {
+margin-bottom: 0.5rem;
+color: var(--accent-color);
+}
+
+.security-features p {
+margin-bottom: 1rem;
+}
+
+.notification-settings {
+max-width: 600px;
+}
+
+.notification-settings h4 {
+margin-bottom: 1.5rem;
+color: var(--accent-color);
+padding-bottom: 0.5rem;
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.setting-item {
+display: flex;
+align-items: flex-start;
+padding: 1.5rem 0;
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+gap: 1rem;
+}
+
+.setting-item:last-child {
+border-bottom: none;
+}
+
+.setting-info {
+flex: 1;
+}
+
+.setting-info strong {
+display: block;
+margin-bottom: 0.3rem;
+}
+
+.setting-info p {
+margin: 0;
+color: var(--gray-color);
+font-size: 0.9rem;
+}
+
+/*
 
