@@ -9,7 +9,7 @@
     --warning-color: #f59e0b;
     --danger-color: #ef4444;
     --gray-color: #6b7280;
-    --border-radius: 10px;
+    --border-radius: 12px;
     --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
 }
@@ -41,54 +41,64 @@ body {
 
 /* Styles pour les logos - TAILLES AUGMENTÉES */
 .game-logo {
-    width: 64px;
-    height: 64px;
+    width: 80px;
+    height: 80px;
     border-radius: var(--border-radius);
     object-fit: cover;
     margin-right: 1rem;
     border: 2px solid var(--primary-color);
-}
-
-.service-logo {
-    width: 70px;
-    height: 70px;
-    border-radius: var(--border-radius);
-    object-fit: cover;
-    border: 2px solid var(--secondary-color);
-}
-
-.payment-logo {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    margin-bottom: 0.5rem;
-}
-
-/* Placeholder pour images manquantes */
-.game-logo[src*="freefire"]:not([src]),
-.game-logo[src*="cod"]:not([src]),
-.game-logo[src*="dls"]:not([src]),
-.game-logo[src*="bloodstrike"]:not([src]) {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
-.service-logo[src*="wise"]:not([src]),
-.service-logo[src*="paypal"]:not([src]),
-.service-logo[src*="usdt"]:not([src]) {
+.service-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    border: 2px solid var(--secondary-color);
     background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
 }
+
+.payment-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+/* Placeholder pour images manquantes */
+.game-logo:not([src]),
+.game-logo[src=""],
+.service-logo:not([src]),
+.service-logo[src=""] {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+/* Textes de placeholder spécifiques */
+.game-logo[alt="Free Fire"]:not([src])::after { content: "FF"; }
+.game-logo[alt="Call of Duty"]:not([src])::after { content: "COD"; }
+.game-logo[alt="DLS 2025"]:not([src])::after { content: "DLS"; }
+.game-logo[alt="Blood Strike"]:not([src])::after { content: "BS"; }
+.service-logo[alt="Wise"]:not([src])::after { content: "Wise"; }
+.service-logo[alt="PayPal"]:not([src])::after { content: "PayPal"; }
+.service-logo[alt="USDT"]:not([src])::after { content: "USDT"; }
 
 /* Bouton de retour */
 .btn-back {
@@ -768,8 +778,8 @@ body {
 }
 
 .financial-logo {
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     border-radius: var(--border-radius);
     background: rgba(255, 255, 255, 0.1);
     display: flex;
@@ -944,27 +954,4 @@ body {
 }
 
 .order-filter.active, .order-filter:hover {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border-color: transparent;
-}
-
-.order-filter .count {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 0.2rem 0.5rem;
-    border-radius: 12px;
-    font-size: 0.8rem;
-}
-
-/* Profil */
-.profile-tabs {
-    display: flex;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--border-radius);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 2rem;
-    overflow: hidden;
-}
-
-.profile-tab {
-    flex: 1;
-    padding: 1rem 1
+    background: line
