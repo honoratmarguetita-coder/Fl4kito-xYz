@@ -1,413 +1,409 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAME-PLAY SOCIETY - Votre plateforme de gaming</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
-</head>
-<body>
-    <!-- Page d'accueil (visible sans connexion) -->
-    <div id="home-page" class="page active">
-        <header class="home-header">
-            <div class="logo-container">
-                <div class="logo">
-                    <i class="fas fa-gamepad"></i>
-                    <span>GAME-PLAY SOCIETY</span>
-                </div>
-                <p class="slogan">Votre plateforme de gaming ultime</p>
-            </div>
-            <button id="login-btn" class="btn-login">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </button>
-        </header>
+<!DOCTYPE html>  <html lang="fr">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>GAME-PLAY SOCIETY - Votre plateforme de gaming</title>  
+    <link rel="stylesheet" href="style.css">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">  
+    <!-- Firebase SDK -->  
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>  
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>  
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>  
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>  
+</head>  
+<body>  
+    <!-- Page d'accueil (visible sans connexion) -->  
+    <div id="home-page" class="page active">  
+        <header class="home-header">  
+            <div class="logo-container">  
+                <div class="logo">  
+                    <i class="fas fa-gamepad"></i>  
+                    <span>GAME-PLAY SOCIETY</span>  
+                </div>  
+                <p class="slogan">Votre plateforme de gaming ultime</p>  
+            </div>  
+            <button id="login-btn" class="btn-login">  
+                <i class="fas fa-sign-in-alt"></i> Login  
+            </button>  
+        </header>  <main class="home-main">  
+        <section class="hero-section">  
+            <h1>Bienvenue sur <span class="highlight">GAME-PLAY SOCIETY</span></h1>  
+            <p>La plateforme de gaming qui révolutionne votre expérience de jeu</p>  
+            <div class="cta-buttons">  
+                <button id="hero-login-btn" class="btn-primary">Se connecter</button>  
+                <button id="hero-register-btn" class="btn-secondary">Créer un compte</button>  
+            </div>  
+        </section>  
 
-        <main class="home-main">
-            <section class="hero-section">
-                <h1>Bienvenue sur <span class="highlight">GAME-PLAY SOCIETY</span></h1>
-                <p>La plateforme de gaming qui révolutionne votre expérience de jeu</p>
-                <div class="cta-buttons">
-                    <button id="hero-login-btn" class="btn-primary">Se connecter</button>
-                    <button id="hero-register-btn" class="btn-secondary">Créer un compte</button>
-                </div>
-            </section>
+        <section class="services-preview">  
+            <h2>Nos Services</h2>  
+            <div class="services-grid">  
+                <div class="service-card">  
+                    <i class="fas fa-coins"></i>  
+                    <h3>Top Up Gaming</h3>  
+                    <p>Rechargez vos jeux favoris comme Free Fire, Call of Duty et plus encore</p>  
+                </div>  
+                <div class="service-card">  
+                    <i class="fas fa-film"></i>  
+                    <h3>Streaming</h3>  
+                    <p>Abonnements Netflix et autres services de streaming premium</p>  
+                </div>  
+                <div class="service-card">  
+                    <i class="fas fa-chart-line"></i>  
+                    <h3>Services Financiers</h3>  
+                    <p>Recharge Paypal, achat crypto-monnaie et services financiers</p>  
+                </div>  
+            </div>  
+        </section>  
+    </main>  
 
-            <section class="services-preview">
-                <h2>Nos Services</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <i class="fas fa-coins"></i>
-                        <h3>Top Up Gaming</h3>
-                        <p>Rechargez vos jeux favoris comme Free Fire, Call of Duty et plus encore</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-film"></i>
-                        <h3>Streaming</h3>
-                        <p>Abonnements Netflix et autres services de streaming premium</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>Services Financiers</h3>
-                        <p>Recharge Paypal, achat crypto-monnaie et services financiers</p>
-                    </div>
-                </div>
-            </section>
-        </main>
+    <footer class="home-footer">  
+        <p>&copy; 2024 GAME-PLAY SOCIETY. Tous droits réservés.</p>  
+    </footer>  
+</div>  
 
-        <footer class="home-footer">
-            <p>&copy; 2024 GAME-PLAY SOCIETY. Tous droits réservés.</p>
-        </footer>
-    </div>
+<!-- Page de connexion -->  
+<div id="login-page" class="page">  
+    <div class="auth-container">  
+        <div class="auth-header">  
+            <h1>GAME-PLAY SOCIETY</h1>  
+            <p>Connectez-vous à votre compte</p>  
+        </div>  
+          
+        <form id="login-form" class="auth-form">  
+            <div class="form-group">  
+                <label for="login-email">Email</label>  
+                <input type="email" id="login-email" required>  
+            </div>  
+              
+            <div class="form-group">  
+                <label for="login-password">Mot de passe</label>  
+                <input type="password" id="login-password" required>  
+            </div>  
+              
+            <button type="submit" class="btn-primary">Se connecter</button>  
+        </form>  
+          
+        <div class="auth-footer">  
+            <p>Pas de compte? <a href="#" id="go-to-register">S'inscrire</a></p>  
+            <a href="#" id="back-to-home"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>  
+        </div>  
+    </div>  
+</div>  
 
-    <!-- Page de connexion -->
-    <div id="login-page" class="page">
-        <div class="auth-container">
-            <div class="auth-header">
-                <h1>GAME-PLAY SOCIETY</h1>
-                <p>Connectez-vous à votre compte</p>
-            </div>
-            
-            <form id="login-form" class="auth-form">
-                <div class="form-group">
-                    <label for="login-email">Email</label>
-                    <input type="email" id="login-email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="login-password">Mot de passe</label>
-                    <input type="password" id="login-password" required>
-                </div>
-                
-                <button type="submit" class="btn-primary">Se connecter</button>
-            </form>
-            
-            <div class="auth-footer">
-                <p>Pas de compte? <a href="#" id="go-to-register">S'inscrire</a></p>
-                <a href="#" id="back-to-home"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>
-            </div>
-        </div>
-    </div>
+<!-- Page d'inscription -->  
+<div id="register-page" class="page">  
+    <div class="auth-container">  
+        <div class="auth-header">  
+            <h1>GAME-PLAY SOCIETY</h1>  
+            <p>Créez votre compte</p>  
+        </div>  
+          
+        <form id="register-form" class="auth-form">  
+            <div class="name-group">  
+                <div class="form-group">  
+                    <label for="first-name">Prénom</label>  
+                    <input type="text" id="first-name" required>  
+                </div>  
+                <div class="form-group">  
+                    <label for="last-name">Nom</label>  
+                    <input type="text" id="last-name" required>  
+                </div>  
+            </div>  
+              
+            <div class="form-group">  
+                <label for="register-email">Email</label>  
+                <input type="email" id="register-email" required>  
+            </div>  
+              
+            <div class="form-group">  
+                <label for="whatsapp">Numéro de WhatsApp</label>  
+                <input type="tel" id="whatsapp" required>  
+            </div>  
+              
+            <div class="form-group">  
+                <label for="register-password">Mot de passe (8 caractères minimum)</label>  
+                <input type="password" id="register-password" minlength="8" required>  
+            </div>  
+              
+            <div class="form-group">  
+                <label for="confirm-password">Confirmer le mot de passe</label>  
+                <input type="password" id="confirm-password" required>  
+            </div>  
+              
+            <button type="submit" class="btn-primary">Créer un compte</button>  
+        </form>  
+          
+        <div class="auth-footer">  
+            <p>Déjà un compte? <a href="#" id="go-to-login">Se connecter</a></p>  
+            <a href="#" id="back-to-home-register"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>  
+        </div>  
+    </div>  
+</div>  
 
-    <!-- Page d'inscription -->
-    <div id="register-page" class="page">
-        <div class="auth-container">
-            <div class="auth-header">
-                <h1>GAME-PLAY SOCIETY</h1>
-                <p>Créez votre compte</p>
-            </div>
-            
-            <form id="register-form" class="auth-form">
-                <div class="name-group">
-                    <div class="form-group">
-                        <label for="first-name">Prénom</label>
-                        <input type="text" id="first-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="last-name">Nom</label>
-                        <input type="text" id="last-name" required>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="register-email">Email</label>
-                    <input type="email" id="register-email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="whatsapp">Numéro de WhatsApp</label>
-                    <input type="tel" id="whatsapp" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="register-password">Mot de passe (8 caractères minimum)</label>
-                    <input type="password" id="register-password" minlength="8" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="confirm-password">Confirmer le mot de passe</label>
-                    <input type="password" id="confirm-password" required>
-                </div>
-                
-                <button type="submit" class="btn-primary">Créer un compte</button>
-            </form>
-            
-            <div class="auth-footer">
-                <p>Déjà un compte? <a href="#" id="go-to-login">Se connecter</a></p>
-                <a href="#" id="back-to-home-register"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>
-            </div>
-        </div>
-    </div>
+<!-- Page principale après connexion -->  
+<div id="main-page" class="page">  
+    <!-- Menu latéral -->  
+    <div id="sidebar" class="sidebar">  
+        <div class="sidebar-header">  
+            <div class="logo">  
+                <i class="fas fa-gamepad"></i>  
+                <span>GAME-PLAY SOCIETY</span>  
+            </div>  
+        </div>  
+          
+        <div class="user-info">  
+            <div class="user-avatar">  
+                <i class="fas fa-user"></i>  
+            </div>  
+            <div class="user-details">  
+                <span id="user-name">Nom Utilisateur</span>  
+                <span id="user-email">email@example.com</span>  
+            </div>  
+        </div>  
+          
+        <nav class="sidebar-nav">  
+            <a href="#" class="nav-item active" data-page="dashboard">  
+                <i class="fas fa-home"></i>  
+                <span>Accueil</span>  
+            </a>  
+            <a href="#" class="nav-item" data-page="gaming">  
+                <i class="fas fa-gamepad"></i>  
+                <span>Recharge de jeux</span>  
+            </a>  
+            <a href="#" class="nav-item" data-page="streaming">  
+                <i class="fas fa-film"></i>  
+                <span>Streaming</span>  
+            </a>  
+            <a href="#" class="nav-item" data-page="financial">  
+                <i class="fas fa-chart-line"></i>  
+                <span>Services Financiers</span>  
+            </a>  
+            <a href="#" class="nav-item" data-page="wallet">  
+                <i class="fas fa-wallet"></i>  
+                <span>Portefeuille</span>  
+            </a>  
+            <a href="#" class="nav-item" data-page="orders">  
+                <i class="fas fa-shopping-cart"></i>  
+                <span>Commandes</span>  
+            </a>  
+            <a href="#" class="nav-item" data-page="profile">  
+                <i class="fas fa-user"></i>  
+                <span>Profil</span>  
+            </a>  
+            <a href="#" class="nav-item" data-page="settings">  
+                <i class="fas fa-cog"></i>  
+                <span>Paramètres</span>  
+            </a>  
+            <!-- Menu Admin sera ajouté dynamiquement -->  
+            <a href="#" id="logout-btn" class="nav-item logout">  
+                <i class="fas fa-sign-out-alt"></i>  
+                <span>Déconnexion</span>  
+            </a>  
+        </nav>  
+    </div>  
 
-    <!-- Page principale après connexion -->
-    <div id="main-page" class="page">
-        <!-- Menu latéral -->
-        <div id="sidebar" class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <i class="fas fa-gamepad"></i>
-                    <span>GAME-PLAY SOCIETY</span>
-                </div>
-            </div>
-            
-            <div class="user-info">
-                <div class="user-avatar">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="user-details">
-                    <span id="user-name">Nom Utilisateur</span>
-                    <span id="user-email">email@example.com</span>
-                </div>
-            </div>
-            
-            <nav class="sidebar-nav">
-                <a href="#" class="nav-item active" data-page="dashboard">
-                    <i class="fas fa-home"></i>
-                    <span>Accueil</span>
-                </a>
-                <a href="#" class="nav-item" data-page="gaming">
-                    <i class="fas fa-gamepad"></i>
-                    <span>Recharge de jeux</span>
-                </a>
-                <a href="#" class="nav-item" data-page="streaming">
-                    <i class="fas fa-film"></i>
-                    <span>Streaming</span>
-                </a>
-                <a href="#" class="nav-item" data-page="financial">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Services Financiers</span>
-                </a>
-                <a href="#" class="nav-item" data-page="wallet">
-                    <i class="fas fa-wallet"></i>
-                    <span>Portefeuille</span>
-                </a>
-                <a href="#" class="nav-item" data-page="orders">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>Commandes</span>
-                </a>
-                <a href="#" class="nav-item" data-page="profile">
-                    <i class="fas fa-user"></i>
-                    <span>Profil</span>
-                </a>
-                <a href="#" class="nav-item" data-page="settings">
-                    <i class="fas fa-cog"></i>
-                    <span>Paramètres</span>
-                </a>
-                <a href="#" id="logout-btn" class="nav-item logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Déconnexion</span>
-                </a>
-            </nav>
-        </div>
+    <!-- Contenu principal -->  
+    <div class="main-content">  
+        <!-- Header avec bouton menu -->  
+        <header class="content-header">  
+            <button id="menu-toggle" class="menu-toggle">  
+                <i class="fas fa-bars"></i>  
+            </button>  
+            <h1 id="page-title">Tableau de bord</h1>  
+            <!-- Bouton de retour au menu principal -->  
+            <button id="back-to-dashboard" class="btn-back" style="display: none;">  
+                <i class="fas fa-arrow-left"></i> Retour au menu  
+            </button>  
+        </header>  
 
-        <!-- Contenu principal -->
-        <div class="main-content">
-            <!-- Header avec bouton menu -->
-            <header class="content-header">
-                <button id="menu-toggle" class="menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <h1 id="page-title">Tableau de bord</h1>
-                <!-- Bouton de retour au menu principal -->
-                <button id="back-to-dashboard" class="btn-back" style="display: none;">
-                    <i class="fas fa-arrow-left"></i> Retour au menu
-                </button>
-                <!-- Panier -->
-                <button id="cart-button" class="btn-primary">
-                    <i class="fas fa-shopping-cart"></i>
-                    Panier (<span id="cart-count">0</span>)
-                </button>
-            </header>
+        <!-- Contenu des pages -->  
+        <div class="page-content">  
+            <!-- Tableau de bord -->  
+            <div id="dashboard" class="content-section active">  
+                <div class="welcome-banner">  
+                    <h2>Bienvenue sur GAME-PLAY SOCIETY</h2>  
+                    <p>Choisissez un service pour commencer</p>  
+                </div>  
+                  
+                <div class="services-grid-main">  
+                    <div class="service-card-main" data-service="gaming">  
+                        <div class="service-icon">  
+                            <i class="fas fa-coins"></i>  
+                        </div>  
+                        <h3>Top Up Gaming</h3>  
+                        <p>Rechargez vos jeux mobiles favoris</p>  
+                        <button class="btn-service">Explorer</button>  
+                    </div>  
+                      
+                    <div class="service-card-main" data-service="streaming">  
+                        <div class="service-icon">  
+                            <i class="fas fa-film"></i>  
+                        </div>  
+                        <h3>Streaming</h3>  
+                        <p>Abonnements aux services de streaming</p>  
+                        <button class="btn-service">Explorer</button>  
+                    </div>  
+                      
+                    <div class="service-card-main" data-service="financial">  
+                        <div class="service-icon">  
+                            <i class="fas fa-chart-line"></i>  
+                        </div>  
+                        <h3>Services Financiers</h3>  
+                        <p>Services financiers et paiements</p>  
+                        <button class="btn-service">Explorer</button>  
+                    </div>  
+                </div>  
+            </div>  
 
-            <!-- Contenu des pages -->
-            <div class="page-content">
-                <!-- Tableau de bord -->
-                <div id="dashboard" class="content-section active">
-                    <div class="welcome-banner">
-                        <h2>Bienvenue sur GAME-PLAY SOCIETY</h2>
-                        <p>Choisissez un service pour commencer</p>
-                    </div>
-                    
-                    <div class="services-grid-main">
-                        <div class="service-card-main" data-service="gaming">
-                            <div class="service-icon">
-                                <i class="fas fa-coins"></i>
-                            </div>
-                            <h3>Top Up Gaming</h3>
-                            <p>Rechargez vos jeux mobiles favoris</p>
-                            <button class="btn-service">Explorer</button>
-                        </div>
-                        
-                        <div class="service-card-main" data-service="streaming">
-                            <div class="service-icon">
-                                <i class="fas fa-film"></i>
-                            </div>
-                            <h3>Streaming</h3>
-                            <p>Abonnements aux services de streaming</p>
-                            <button class="btn-service">Explorer</button>
-                        </div>
-                        
-                        <div class="service-card-main" data-service="financial">
-                            <div class="service-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h3>Services Financiers</h3>
-                            <p>Services financiers et paiements</p>
-                            <button class="btn-service">Explorer</button>
-                        </div>
-                    </div>
-                </div>
+            <!-- Page Recharge de jeux -->  
+            <div id="gaming" class="content-section">  
+                <div class="page-header">  
+                    <h2>Recharge de Jeux</h2>  
+                    <div class="search-bar">  
+                        <i class="fas fa-search"></i>  
+                        <input type="text" placeholder="Rechercher des jeux...">  
+                    </div>  
+                </div>  
+                  
+                <div class="game-filters">  
+                    <button class="filter-btn active">Tous les Jeux</button>  
+                    <button class="filter-btn">PC</button>  
+                    <button class="filter-btn">Console</button>  
+                    <button class="filter-btn">Mobile</button>  
+                </div>  
 
-                <!-- Page Recharge de jeux -->
-                <div id="gaming" class="content-section">
-                    <div class="page-header">
-                        <h2>Recharge de Jeux</h2>
-                        <div class="search-bar">
-                            <i class="fas fa-search"></i>
-                            <input type="text" placeholder="Rechercher des jeux...">
-                        </div>
-                    </div>
-                    
-                    <div class="game-filters">
-                        <button class="filter-btn active">Tous les Jeux</button>
-                        <button class="filter-btn">PC</button>
-                        <button class="filter-btn">Console</button>
-                        <button class="filter-btn">Mobile</button>
-                    </div>
+                <div class="games-section">  
+                    <h3 class="section-label">Mobile</h3>  
+                    <div class="games-grid">  
+                        <!-- Free Fire -->  
+                        <div class="game-card">  
+                            <div class="game-header">  
+                                <img src="images/freefire-logo.png" alt="Free Fire" class="game-logo">  
+                                <div class="game-info">  
+                                    <h3>Free Fire - Diamants</h3>  
+                                    <p class="price">À partir de 157 HTG</p>  
+                                </div>  
+                            </div>  
+                            <div class="game-actions">  
+                                <button class="btn-outline view-products" data-game="freefire">Voir</button>  
+                                <button class="btn-primary add-to-cart" data-product="100 Diamants" data-price="157" data-game="Free Fire">Panier</button>  
+                            </div>  
+                        </div>  
+                          
+                        <!-- Call of Duty -->  
+                        <div class="game-card">  
+                            <div class="game-header">  
+                                <img src="images/cod-logo.png" alt="Call of Duty" class="game-logo">  
+                                <div class="game-info">  
+                                    <h3>Call of Duty - CP</h3>  
+                                    <p class="price">À partir de 180 HTG</p>  
+                                </div>  
+                            </div>  
+                            <div class="game-actions">  
+                                <button class="btn-outline view-products" data-game="cod">Voir</button>  
+                                <button class="btn-primary add-to-cart" data-product="80 CP" data-price="180" data-game="Call of Duty">Panier</button>  
+                            </div>  
+                        </div>  
+                          
+                        <!-- DLS 2025 -->  
+                        <div class="game-card">  
+                            <div class="game-header">  
+                                <img src="images/dls-logo.png" alt="DLS 2025" class="game-logo">  
+                                <div class="game-info">  
+                                    <h3>DLS - Jetons</h3>  
+                                    <p class="price">À partir de 340 HTG</p>  
+                                </div>  
+                            </div>  
+                            <div class="game-actions">  
+                                <button class="btn-outline view-products" data-game="dls">Voir</button>  
+                                <button class="btn-primary add-to-cart" data-product="900 Jetons" data-price="340" data-game="DLS">Panier</button>  
+                            </div>  
+                        </div>  
+                          
+                        <!-- Blood Strike -->  
+                        <div class="game-card">  
+                            <div class="game-header">  
+                                <img src="images/bloodstrike-logo.png" alt="Blood Strike" class="game-logo">  
+                                <div class="game-info">  
+                                    <h3>Blood Strike - Gold</h3>  
+                                    <p class="price">À partir de 170 HTG</p>  
+                                </div>  
+                            </div>  
+                            <div class="game-actions">  
+                                <button class="btn-outline view-products" data-game="bloodstrike">Voir</button>  
+                                <button class="btn-primary add-to-cart" data-product="16 Gold" data-price="170" data-game="Blood Strike">Panier</button>  
+                            </div>  
+                        </div>  
+                    </div>  
+                </div>  
+            </div>  
 
-                    <div class="games-section">
-                        <h3 class="section-label">Mobile</h3>
-                        <div class="games-grid">
-                            <!-- Free Fire -->
-                            <div class="game-card">
-                                <div class="game-header">
-                                    <img src="images/freefire-logo.png" alt="Free Fire" class="game-logo">
-                                    <div class="game-info">
-                                        <h3>Free Fire - Diamants</h3>
-                                        <p class="price">À partir de 157 HTG</p>
-                                    </div>
-                                </div>
-                                <div class="game-actions">
-                                    <button class="btn-outline view-products" data-game="freefire">Voir</button>
-                                    <button class="btn-primary add-to-cart" data-product="100 Diamants" data-price="157" data-game="Free Fire">Panier</button>
-                                </div>
-                            </div>
-                            
-                            <!-- Call of Duty -->
-                            <div class="game-card">
-                                <div class="game-header">
-                                    <img src="images/cod-logo.png" alt="Call of Duty" class="game-logo">
-                                    <div class="game-info">
-                                        <h3>Call of Duty - CP</h3>
-                                        <p class="price">À partir de 180 HTG</p>
-                                    </div>
-                                </div>
-                                <div class="game-actions">
-                                    <button class="btn-outline view-products" data-game="cod">Voir</button>
-                                    <button class="btn-primary add-to-cart" data-product="80 CP" data-price="180" data-game="Call of Duty">Panier</button>
-                                </div>
-                            </div>
-                            
-                            <!-- DLS 2025 -->
-                            <div class="game-card">
-                                <div class="game-header">
-                                    <img src="images/dls-logo.png" alt="DLS 2025" class="game-logo">
-                                    <div class="game-info">
-                                        <h3>DLS - Jetons</h3>
-                                        <p class="price">À partir de 340 HTG</p>
-                                    </div>
-                                </div>
-                                <div class="game-actions">
-                                    <button class="btn-outline view-products" data-game="dls">Voir</button>
-                                    <button class="btn-primary add-to-cart" data-product="900 Jetons" data-price="340" data-game="DLS">Panier</button>
-                                </div>
-                            </div>
-                            
-                            <!-- Blood Strike -->
-                            <div class="game-card">
-                                <div class="game-header">
-                                    <img src="images/bloodstrike-logo.png" alt="Blood Strike" class="game-logo">
-                                    <div class="game-info">
-                                        <h3>Blood Strike - Gold</h3>
-                                        <p class="price">À partir de 170 HTG</p>
-                                    </div>
-                                </div>
-                                <div class="game-actions">
-                                    <button class="btn-outline view-products" data-game="bloodstrike">Voir</button>
-                                    <button class="btn-primary add-to-cart" data-product="16 Gold" data-price="170" data-game="Blood Strike">Panier</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Page Streaming -->  
+            <div id="streaming" class="content-section">  
+                <h2>Services de Streaming</h2>  
+                <div class="info-message">  
+                    <i class="fas fa-info-circle"></i>  
+                    <p>Les services de streaming ne sont pas encore disponibles. Revenez bientôt!</p>  
+                </div>  
+            </div>  
 
-                <!-- Page Streaming -->
-                <div id="streaming" class="content-section">
-                    <h2>Services de Streaming</h2>
-                    <div class="info-message">
-                        <i class="fas fa-info-circle"></i>
-                        <p>Les services de streaming ne sont pas encore disponibles. Revenez bientôt!</p>
-                    </div>
-                </div>
+            <!-- Page Services Financiers -->  
+            <div id="financial" class="content-section">  
+                <h2>Services Financiers</h2>  
+                <p class="page-subtitle">Choisissez votre service financier préféré</p>  
+                  
+                <div class="financial-services-grid">  
+                    <!-- Wise -->  
+                    <div class="financial-card">  
+                        <div class="financial-header">  
+                            <div class="financial-logo">  
+                                <img src="images/wise-logo.png" alt="Wise" class="service-logo">  
+                            </div>  
+                            <h3>Wise</h3>  
+                        </div>  
+                        <p>Envoyez et recevez de l'argent facilement avec Wise</p>  
+                        <button class="btn-outline view-financial" data-service="wise">Voir plus</button>  
+                    </div>  
+                      
+                    <!-- PayPal -->  
+                    <div class="financial-card">  
+                        <div class="financial-header">  
+                            <div class="financial-logo">  
+                                <img src="images/paypal-logo.png" alt="PayPal" class="service-logo">  
+                            </div>  
+                            <h3>PayPal</h3>  
+                        </div>  
+                        <p>Rechargez votre compte PayPal en toute sécurité</p>  
+                        <button class="btn-outline view-financial" data-service="paypal">Voir plus</button>  
+                    </div>  
+                      
+                    <!-- USDT -->  
+                    <div class="financial-card">  
+                        <div class="financial-header">  
+                            <div class="financial-logo">  
+                                <img src="images/usdt-logo.png" alt="USDT" class="service-logo">  
+                            </div>  
+                            <h3>USDT</h3>  
+                        </div>  
+                        <p>Achetez des USDT pour vos transactions crypto</p>  
+                        <button class="btn-outline view-financial" data-service="usdt">Voir plus</button>  
+                    </div>  
+                </div>  
+            </div>  
 
-                <!-- Page Services Financiers -->
-                <div id="financial" class="content-section">
-                    <h2>Services Financiers</h2>
-                    <p class="page-subtitle">Choisissez votre service financier préféré</p>
-                    
-                    <div class="financial-services-grid">
-                        <!-- Wise -->
-                        <div class="financial-card">
-                            <div class="financial-header">
-                                <div class="financial-logo">
-                                    <img src="images/wise-logo.png" alt="Wise" class="service-logo">
-                                </div>
-                                <h3>Wise</h3>
-                            </div>
-                            <p>Envoyez et recevez de l'argent facilement avec Wise</p>
-                            <button class="btn-outline view-financial" data-service="wise">Voir plus</button>
-                        </div>
-                        
-                        <!-- PayPal -->
-                        <div class="financial-card">
-                            <div class="financial-header">
-                                <div class="financial-logo">
-                                    <img src="images/paypal-logo.png" alt="PayPal" class="service-logo">
-                                </div>
-                                <h3>PayPal</h3>
-                            </div>
-                            <p>Rechargez votre compte PayPal en toute sécurité</p>
-                            <button class="btn-outline view-financial" data-service="paypal">Voir plus</button>
-                        </div>
-                        
-                        <!-- USDT -->
-                        <div class="financial-card">
-                            <div class="financial-header">
-                                <div class="financial-logo">
-                                    <img src="images/usdt-logo.png" alt="USDT" class="service-logo">
-                                </div>
-                                <h3>USDT</h3>
-                            </div>
-                            <p>Achetez des USDT pour vos transactions crypto</p>
-                            <button class="btn-outline view-financial" data-service="usdt">Voir plus</button>
-                        </div>
-                    </div>
-                </div>
+            <!-- Page Portefeuille -->  
+            <div id="wallet" class="content-section">  
+                <div class="wallet-header">  
+                    <h2>Portefeuille</h2>  
+                    <button class="btn-refresh">  
+                        <i class="fas fa-sync-alt"></i> Actualiser  
+                    </button>  
+                </div>  
+                  
+                <div class="wallet-balance">  
+                    <h3>Mon Portefeuille</h3>  
+                    <div class="balance-amount">  
+                        <span class="currency">HTG</sp
 
-                <!-- Page Portefeuille -->
-                <div id="wallet" class="content-section">
-                    <div class="wallet-header">
-                        <h2>Portefeuille</h2>
-                        <button class="btn-refresh">
-                            <i class="fas fa-sync-alt"></i> Actualiser
-                        </button>
-                    </div>
-                    
-                    <div class="wallet-balance">
-               
